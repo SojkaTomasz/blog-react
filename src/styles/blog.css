@@ -1,0 +1,21 @@
+.box-article {
+	margin: 25px 0;
+}
+
+.title-articles {
+	font-size: 20px;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+	transition: 0.4s;
+}
+
+a:hover {
+	color: yellowgreen;
+}
+
+a:hover > .highlighted {
+	color: rgb(255, 255, 255);
+}

@@ -1,0 +1,121 @@
+.nav {
+	position: relative;
+	position: sticky;
+	top: 0;
+}
+
+.headerNav {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px;
+	background-color: #2d2d2d;
+	z-index: 5;
+}
+
+.logo {
+	padding-left: 15px;
+	font-size: 35px;
+	color: white;
+	text-decoration: none;
+}
+
+.logo span {
+	color: yellowgreen;
+}
+
+.fa-solid {
+	padding: 5px;
+	font-size: 30px;
+	color: white;
+	transition: 0.5s;
+	cursor: pointer;
+}
+
+.fa-solid:hover {
+	color: yellowgreen;
+}
+
+/* _________ */
+
+.ulListNav {
+	position: absolute;
+	left: 0;
+	right: 0;
+	transform: translateY(-100%);
+	transition: 0.5s;
+	z-index: 1;
+}
+
+.linkNav {
+	display: block;
+	padding: 10px;
+	height: 100%;
+	width: 100%;
+	font-weight: bold;
+	text-transform: uppercase;
+	text-decoration: none;
+	color: white;
+	transition: 0.4s;
+}
+
+.linkNav:hover {
+	transform: translateX(10px);
+}
+
+.active:hover {
+	transform: translateX(0);
+}
+
+ul {
+	padding: 10px 15px;
+	list-style: none;
+	background-color: #333;
+}
+
+li {
+	transition: 0.4s;
+	position: relative;
+	border-left: 5px solid transparent;
+}
+
+li:hover {
+	background-color: #222;
+	border-left: 5px solid yellowgreen;
+}
+
+.ulListNavActive {
+	transform: translateY(0);
+}
+
+.active {
+	color: yellowgreen;
+}
+
+@media (min-width: 576px) {
+}
+
+@media (min-width: 768px) {
+	ul {
+		padding: 10px;
+	}
+	li {
+		margin: 10px 0;
+		padding: 0 20px 0 0;
+	}
+	.fa-solid {
+		display: none;
+	}
+	.ulListNav {
+		position: relative;
+		transform: translate(0);
+	}
+	.logo {
+		font-size: 40px;
+		/* margin-top: 20px; */
+	}
+	.nav {
+		width: 200px;
+	}
+}
