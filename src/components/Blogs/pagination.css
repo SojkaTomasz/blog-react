@@ -8,6 +8,7 @@
 	border: none;
 	background-color: yellowgreen;
 	text-transform: uppercase;
+	text-decoration: none;
 	font-weight: bold;
 	padding: 8px 10px;
 	color: white;
@@ -23,7 +24,7 @@
 .disabled-btn {
 	background-color: #ececec;
 	color: #333;
-	cursor: default;
+	pointer-events: none;
 }
 .disabled-btn:hover {
 	background-color: #ececec;

@@ -20,23 +20,23 @@ function Pagination(props) {
 
 	return (
 		<div className='box-pagination'>
-			<button
-				disabled={isActiveBack}
+			<a
+				href='#pagination'
 				onClick={() => props.click(1, "-")}
 				className={`btn-pagination ${!isActiveBack || "disabled-btn"}`}
 			>
 				Wstecz
-			</button>
+			</a>
 			<p>
 				{props.fromPage} - {props.toPage} / {props.lengthPage}
 			</p>
-			<button
-				disabled={isActiveForward}
+			<a
+				href='#pagination'
 				onClick={() => props.click(1, "+")}
 				className={`btn-pagination ${!isActiveForward || "disabled-btn"}`}
 			>
-				Następna
-			</button>
+				Wstecz
+			</a>
 		</div>
 	)
 }

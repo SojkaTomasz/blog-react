@@ -94,7 +94,7 @@ const Blog = () => {
 	} else {
 		return (
 			<>
-				<h1 className='title-section'>Blog</h1>
+				<h1 id='pagination' className='title-section'>Blog</h1>
 				{state.getData ? (
 					<div>
 						<Filter
