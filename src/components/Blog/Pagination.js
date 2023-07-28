@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import "./pagination.css"
+import "./styles/pagination.css"
 
 function Pagination(props) {
 	const [isActiveForward, setIsActiveForward] = useState(false)
@@ -23,7 +23,7 @@ function Pagination(props) {
 			<a
 				href='#pagination'
 				onClick={() => props.click(1, "-")}
-				className={`btn-pagination ${!isActiveBack || "disabled-btn"}`}
+				className={`btn-pagination ${!isActiveBack || "btn-pagination-disabled"}`}
 			>
 				Wstecz
 			</a>
@@ -33,7 +33,7 @@ function Pagination(props) {
 			<a
 				href='#pagination'
 				onClick={() => props.click(1, "+")}
-				className={`btn-pagination ${!isActiveForward || "disabled-btn"}`}
+				className={`btn-pagination ${!isActiveForward || "btn-pagination-disabled"}`}
 			>
 				Wstecz
 			</a>

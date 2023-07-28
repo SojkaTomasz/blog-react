@@ -1,18 +1,18 @@
 .box-filter {
-	margin: 0 -3px;
 	display: flex;
 	flex-wrap: wrap;
-	padding: 10px 0;
 	align-items: center;
 	justify-content: flex-end;
+	margin: 0 -3px;
+	padding: 10px 0;
 }
 
-select,
+.select-filter,
 .filter-input {
 	margin: 3px;
 }
 
-select {
+.select-filter {
 	cursor: pointer;
 }
 

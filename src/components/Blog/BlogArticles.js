@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom"
-import noPhoto from "../images/no-image-available.jpg"
-import "../styles/articles.css"
+import noPhoto from "../../images/no-image-available.jpg"
+import "./styles/BlogArticles.css"
 
-function Articles({
+function BlogArticles({
 	title,
 	publishedAt,
 	urlToImage,
@@ -17,25 +17,25 @@ function Articles({
 			const regex = new RegExp(valueSearch, "gi")
 			return title.replace(
 				regex,
-				match => `<span class="highlighted">${match}</span>`
+				match => `<span class="highlighted-blog-articles">${match}</span>`
 			)
 		}
 		return title
 	}
 
 	return (
-		<article className='box-article'>
+		<article className='box-blog-articles'>
 			<div>
 				{urlToImage ? (
-					<img src={urlToImage} alt={title} />
+					<img className="img-blog-articles" src={urlToImage} alt={title} />
 				) : (
-					<img src={noPhoto} alt='brak zdjęcia' />
+					<img className="img-blog-articles" src={noPhoto} alt='brak zdjęcia' />
 				)}
 			</div>
 			<div>
-				<h2 className='title-articles'>
+				<h2 className='title-blog-articles'>
 					<Link
-						className='title-article'
+						className='title-blog-articles'
 						to={`/blog/${encodeURIComponent(title.replace("%", "%25"))}`}
 						author={author}
 						dangerouslySetInnerHTML={{ __html: highlightedTitle() }}
@@ -53,4 +53,4 @@ function Articles({
 	)
 }
 
-export default Articles
+export default BlogArticles

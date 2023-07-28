@@ -2,12 +2,12 @@ import { useEffect, useReducer, useContext } from "react"
 import { initialState, reducer } from "../reducer/reducerBlog"
 import { Link } from "react-router-dom"
 import LoginContext from "../context/loginContext"
-import Pagination from "../components/Blogs/Pagination"
-import Filter from "../components/Blogs/Filter"
+import Pagination from "../components/Blog/Pagination"
+import Filter from "../components/Blog/Filter"
 import Preloader from "../UI/Preloader"
 import articleData from "../data/articleData"
-import axios from "axios"
-import Articles from "./Articles"
+// import axios from "axios"
+import BlogArticles from "../components/Blog/BlogArticles"
 import "../styles/blog.css"
 
 const API_KEY = process.env.REACT_APP_API_KEY
@@ -18,7 +18,6 @@ const Blog = () => {
 	const toPage = state.currentPage * state.blogsPerPage
 	const fromPage = toPage - state.blogsPerPage
 	const isLogged = useContext(LoginContext)
-	
 
 	useEffect(() => {
 		dispatch({ type: "setCurrentPage", currentPage: 1 })
@@ -78,8 +77,8 @@ const Blog = () => {
 			toPage={toPage}
 		/>
 	)
-	const articles = state.searchState.map((blog, id) => (
-		<Articles key={id} id={id} {...blog} valueSearch={state.valueSearch} />
+	const blogArticles = state.searchState.map((blog, id) => (
+		<BlogArticles key={id} id={id} {...blog} valueSearch={state.valueSearch} />
 	))
 
 	if (!isLogged.isLogged) {
@@ -87,14 +86,16 @@ const Blog = () => {
 			<>
 				<h1 className='title-section'>Blog</h1>
 				<p>Musisz się zalogować aby zobaczyć treść</p> <br />
-				<Link className='link' to='/login'>{`>> Logowanie`}</Link>
-				<Link className='link' to='/rejestracja'>{`>> Rejestracja`}</Link>
+				<Link className='link-blog' to='/login'>{`>> Logowanie`}</Link>
+				<Link className='link-blog' to='/rejestracja'>{`>> Rejestracja`}</Link>
 			</>
 		)
 	} else {
 		return (
 			<>
-				<h1 id='pagination' className='title-section'>Blog</h1>
+				<h1 id='pagination' className='title-section'>
+					Blog
+				</h1>
 				{state.getData ? (
 					<div>
 						<Filter
@@ -106,7 +107,7 @@ const Blog = () => {
 						{pagination}
 						<div>
 							{state.searchState.length ? (
-								articles.slice(fromPage, toPage)
+								blogArticles.slice(fromPage, toPage)
 							) : (
 								<p style={{ textAlign: "center", color: "tomato" }}>
 									Nie znaleziono żandego wpisu!

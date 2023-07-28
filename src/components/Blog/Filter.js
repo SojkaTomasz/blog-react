@@ -1,10 +1,10 @@
-import "./filter.css"
+import "./styles/filter.css"
 
 function Filter(props) {
 	return (
 		<div className='box-filter'>
 			<input
-			className="filter-input"
+				className='filter-input'
 				type='text'
 				value={props.valueSearch}
 				onChange={e =>
@@ -14,6 +14,7 @@ function Filter(props) {
 			/>
 			<div>
 				<select
+					className='select-filter'
 					value={props.sort}
 					onChange={e => props.dispatch({ type: "setSort", sort: e.target.value })}
 				>
@@ -23,6 +24,7 @@ function Filter(props) {
 					<option value='z-a'>Alfabetycznie Z-A</option>
 				</select>
 				<select
+					className='select-filter'
 					onChange={e =>
 						props.dispatch({
 							type: "setBlogsPerPage",
