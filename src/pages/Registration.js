@@ -116,12 +116,12 @@ function Registration() {
 		repeatPassword,
 	])
 
-	if (success) {
+	if (!success) {
 		return (
 			<div>
 				<h1 className='title-section'>Rejestracja</h1>
-				<p className='success'>GRATULUJE! Rejestracja przebiegła pomyślnie.</p>
-				<p className='success'>
+				<p className='form-success'>
+					GRATULUJE! Rejestracja przebiegła pomyślnie. <br />
 					zachwilę zostaniesz piekierowany do Panelu użytkownika.
 				</p>
 			</div>
@@ -130,7 +130,7 @@ function Registration() {
 		return (
 			<div>
 				<h1 className='title-section'>Rejestracja</h1>
-				<form className='login-form' action=''>
+				<form className='box-form-registration' action=''>
 					<label htmlFor='email'>Email </label>
 					<input
 						id='email'
@@ -139,7 +139,7 @@ function Registration() {
 						value={email}
 						onChange={e => dispatch({ type: "email", email: e.target.value })}
 					/>
-					{!errorEmail || <p className='error'>{errorEmail}</p>}
+					{!errorEmail || <p className='form-error'>{errorEmail}</p>}
 					<label htmlFor='password'>Hasło </label>
 					<input
 						id='password'
@@ -148,7 +148,7 @@ function Registration() {
 						value={password}
 						onChange={e => dispatch({ type: "password", password: e.target.value })}
 					/>
-					{!errorPassword || <p className='error'>{errorPassword}</p>}
+					{!errorPassword || <p className='form-error'>{errorPassword}</p>}
 					<label htmlFor='repeatPassword'>Powtórz Hasło </label>
 					<input
 						className='form-input'
@@ -159,9 +159,9 @@ function Registration() {
 							dispatch({ type: "repeatPassword", repeatPassword: e.target.value })
 						}
 					/>
-					{!errorRepeatPassword || <p className='error'>{errorRepeatPassword}</p>}
+					{!errorRepeatPassword || <p className='form-error'>{errorRepeatPassword}</p>}
 					<input
-						className={`submit `}
+						className='btn-form btn-form-registration'
 						onClick={handleRegister}
 						type='submit'
 						value='Rejestruj'

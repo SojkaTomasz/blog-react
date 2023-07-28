@@ -62,7 +62,7 @@ function Login() {
 	return (
 		<div>
 			<h1 className='title-section'>Logowanie</h1>
-			<form className='login-form' action=''>
+			<form className='box-form-login' action=''>
 				<label htmlFor='email'>Email </label>
 				<input
 					id='email'
@@ -79,8 +79,8 @@ function Login() {
 					value={password}
 					onChange={e => dispatch({ type: "password", password: e.target.value })}
 				/>
-				{!error || <p className='error'>{error}</p>}
-				<input className='submit' onClick={handleLogin} type='submit' value='Zaloguj' />
+				{!error || <p className='form-error'>{error}</p>}
+				<input className='btn-form btn-form-login' onClick={handleLogin} type='submit' value='Zaloguj' />
 			</form>
 		</div>
 	)

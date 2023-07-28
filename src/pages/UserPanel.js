@@ -27,7 +27,7 @@ function UserPanel() {
 			/>
 			<br />
 			<br />
-			<button onClick={handleLogin}>Wyloguj</button>
+			<button className="btn-form" onClick={handleLogin}>Wyloguj</button>
 		</div>
 	)
 }

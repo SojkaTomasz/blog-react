@@ -66,43 +66,43 @@ function Contact() {
 		return (
 			<div>
 				<h1 className='title-section'>Kontakt</h1>
-				<p className='success'>Wiadomość wysłana poprawnie! Niebawem się odezwiemy.</p>
+				<p className='form-success'>Wiadomość wysłana poprawnie! Niebawem się odezwiemy.</p>
 			</div>
 		)
 	} else {
 		return (
 			<div>
 				<h1 className='title-section'>Kontakt</h1>
-				<form className='form-contact' action=''>
-					<div className='box-email-tel'>
+				<form className='box-form-contact' action=''>
+					<div className='box-contact-email-tel'>
 						<div>
 							<label htmlFor='email'>Email</label>
 							<input
-								className='form-input'
+								className='form-input form-input-email'
 								type='email'
 								id='email'
 								value={email}
 								required
 								onChange={e => dispatch({ type: "email", email: e.target.value })}
 							/>
-							{!errorEmail || <p className='error'>{errorEmail}</p>}
+							{!errorEmail || <p className='form-error'>{errorEmail}</p>}
 						</div>
 						<div>
 							<label htmlFor='tel'>Telefon</label>
 							<input
-								className='form-input'
+								className='form-input form-input-tel'
 								type='tel'
 								it='tel'
 								required
 								value={tel}
 								onChange={e => dispatch({ type: "tel", tel: e.target.value })}
 							/>
-							{!errorTel || <p className='error'>{errorTel}</p>}
+							{!errorTel || <p className='form-error'>{errorTel}</p>}
 						</div>
 					</div>
 					<label htmlFor='message'>Wiadomość</label>
 					<textarea
-						className='form-input'
+						className='form-textarea'
 						id='message'
 						value={message}
 						type='textarea'
@@ -110,8 +110,8 @@ function Contact() {
 						rows='10'
 						required
 					></textarea>
-					{!errorMessage || <p className='error'>{errorMessage}</p>}
-					<input className={`submit`} onClick={send} type='submit' value='Wyślij' />
+					{!errorMessage || <p className='form-error'>{errorMessage}</p>}
+					<input className='btn-form' onClick={send} type='submit' value='Wyślij' />
 					<div></div>
 				</form>
 			</div>

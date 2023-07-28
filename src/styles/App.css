@@ -6,7 +6,7 @@
 }
 
 .header {
-	z-index: 2;
+	z-index: 1;
 }
 
 .aside {
@@ -32,8 +32,8 @@
 }
 
 .title-section {
-	font-size: 40px;
 	margin-bottom: 30px;
+	font-size: 40px;
 	border-bottom: 5px solid yellowgreen;
 }
 
