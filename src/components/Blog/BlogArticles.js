@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import noPhoto from "../../images/no-image-available.jpg"
-import "./styles/BlogArticles.css"
+import "./styles/blogArticles.css"
 
 function BlogArticles({
 	title,

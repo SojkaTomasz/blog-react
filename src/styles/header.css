@@ -1,8 +1,8 @@
 .header-image {
-	position: relative;
 	display: flex;
-	justify-content: center;
+	position: relative;
 	align-items: center;
+	justify-content: center;
 	height: 20vh;
 	background-position: center;
 	background-size: cover;
@@ -10,31 +10,31 @@
 }
 
 .header-image::after {
-	position: absolute;
 	content: "";
+	position: absolute;
 	height: 100%;
 	width: 100%;
 	background-color: #23232387;
 	z-index: 0;
 }
 .header-image::before {
-	position: absolute;
 	content: "";
+	position: absolute;
 	height: 100%;
 	width: 100%;
 	background-color: #1e1e1e;
 	z-index: -1;
 }
 
-.text-header {
-	text-align: center;
+.header-text {
 	padding: 15px;
+	text-align: center;
 	color: white;
 	z-index: 1;
 }
 
 @media (min-width: 576px) {
-	.text-header {
+	.header-text {
 		width: 70%;
 	}
 }
@@ -42,7 +42,7 @@
 	.header-image {
 		height: 25vh;
 	}
-	.text-header {
+	.header-text {
 		width: 50%;
 	}
 }
@@ -51,7 +51,7 @@
 		height: 30vh;
 		font-size: 18px;
 	}
-	.text-header {
-		font-size: 20px;
+	.header-text {
+		font-size: 22px;
 	}
 }

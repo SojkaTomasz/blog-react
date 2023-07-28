@@ -116,7 +116,7 @@ function Registration() {
 		repeatPassword,
 	])
 
-	if (!success) {
+	if (success) {
 		return (
 			<div>
 				<h1 className='title-section'>Rejestracja</h1>

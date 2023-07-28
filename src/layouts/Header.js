@@ -50,7 +50,7 @@ function Header() {
 	}
 	return (
 		<div style={style} className='header-image'>
-			<p className='text-header'>
+			<p className='header-text'>
 				<em>{text}</em>
 			</p>
 		</div>
