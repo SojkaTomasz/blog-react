@@ -143,7 +143,7 @@ const articles = [
 			name: "Biztoc.com",
 		},
 		author: "aol.com",
-		title: "In challenge to Tesla, major automakers launch EV charging network",
+		title: "In challenge to Tesla, major automakers launch EV harging network",
 		description:
 			"A group of major automakers on Wednesday said they were forming a new company to provide electric vehicle charging in the United States in a challenge to Tesla and a bid to take advantage of Biden administration subsidies. The group includes General Motors, S…",
 		url: "https://biztoc.com/x/8c80b6c4713781df",
@@ -160,7 +160,7 @@ const articles = [
 		author: "MarketScreener with dpa-AFX Analyser",
 		title: "UPS : Barclays sticks Neutral",
 		description:
-			"(marketscreener.com) In a research note published by Brandon Oglenski, Barclays gives a Neutral rating to the stock. The target price continues to be set at USD 172.https://www.marketscreener.com/quote/stock/UNITED-PARCEL-SERVICE-INC-14758/news/UPS-Barclays-s…",
+			"(marketscreener.com) In a research note published by Brandon Oglenski, Barclays gives a Neutral rating to the stock. The target price continues to be set at USD 172.https://www.marketscreener.com/…",
 		url:
 			"https://www.marketscreener.com/quote/stock/UNITED-PARCEL-SERVICE-INC-14758/news/UPS-Barclays-sticks-Neutral-44426252/",
 		urlToImage: "https://www.marketscreener.com/images/twitter_MS_fdnoir.png",
@@ -370,8 +370,7 @@ const articles = [
 			id: null,
 			name: "Forbes",
 		},
-		author:
-			"Sam Abuelsamid, Senior Contributor, \n Sam Abuelsamid, Senior Contributor\n https://www.forbes.com/sites/samabuelsamid/",
+		author: "Sam Abuelsamid, Senior Contributor",
 		title: "7 Automakers To Form EV Charging Joint Venture With 30,000 Chargers",
 		description:
 			"General Motors, BMW Group, Mercedes-Benz, Honda, Hyundai, Kia, and Stellantis are creating a joint venture to build a network of 30,000 DC fast chargers for EVs",
@@ -612,7 +611,7 @@ const articles = [
 		author: "MarketScreener with dpa-AFX Analyser",
 		title: "ROCHE HOLDINGS AG : JP Morgan reiterates its Sell rating",
 		description:
-			"(marketscreener.com) JP Morgan reiterate its Sell rating. The target price remains set at CHF 275.https://www.marketscreener.com/quote/stock/ROCHE-HOLDING-AG-9364975/news/ROCHE-HOLDINGS-AG-JP-Morgan-reiterates-its-Sell-rating-44425118/?utm_medium=RSS&utm_cont…",
+			"(marketscreener.com) JP Morgan reiterate its Sell rating. The target price remains set at CHF 275.https://www.marketscreener.com…",
 		url:
 			"https://www.marketscreener.com/quote/stock/ROCHE-HOLDING-AG-9364975/news/ROCHE-HOLDINGS-AG-JP-Morgan-reiterates-its-Sell-rating-44425118/",
 		urlToImage: "https://www.marketscreener.com/images/twitter_MS_fdblanc.png",
@@ -628,7 +627,7 @@ const articles = [
 		author: "MarketScreener with dpa-AFX Analyser",
 		title: "UPS : JP Morgan reiterates its Neutral rating",
 		description:
-			"(marketscreener.com) Brian Ossenbeck from JP Morgan retains his Neutral opinion on the stock. The target price remains set at USD 181.https://www.marketscreener.com/quote/stock/UNITED-PARCEL-SERVICE-INC-14758/news/UPS-JP-Morgan-reiterates-its-Neutral-rating-4…",
+			"(marketscreener.com) Brian Ossenbeck from JP Morgan retains his Neutral opinion on the stock. The target price remains set at USD",
 		url:
 			"https://www.marketscreener.com/quote/stock/UNITED-PARCEL-SERVICE-INC-14758/news/UPS-JP-Morgan-reiterates-its-Neutral-rating-44425112/",
 		urlToImage: "https://www.marketscreener.com/images/twitter_MS_fdblanc.png",
@@ -807,8 +806,7 @@ const articles = [
 			id: null,
 			name: "Forbes",
 		},
-		author:
-			"Billy Bambrough, Senior Contributor, \n Billy Bambrough, Senior Contributor\n https://www.forbes.com/sites/billybambrough/",
+		author: "Billy Bambrough, Senior Contributor",
 		title:
 			"Elon Musk Has Quietly Primed Crypto For An ‘Absolute Game-Changer’ That Could Cause Chaos For The Price Of Bitcoin, Ethereum, XRP And Dogecoin",
 		description:
@@ -827,13 +825,12 @@ const articles = [
 			name: "Vox",
 		},
 		author: "Rebecca Leber",
-		title: "Biden’s $250 billion lure to clean up the dirty legacy of fossil fuels",
+		title: "Biden’s $250 billion lure to clean up the dirty legacy of fosil fuels",
 		description:
 			"Pipelines, power plants, and even gas stations could be candidates for the Department of Energy Loan Programs Office.",
 		url:
 			"https://www.vox.com/climate/23771835/biden-ira-climate-fossil-fuel-energy-investment",
-		urlToImage:
-			"https://cdn.vox-cdn.com/thumbor/OSJ2xZmtnut8XQYNUv9pJeuy60U=/0x392:5472x3257/fit-in/1200x630/cdn.vox-cdn.com/uploads/chorus_asset/file/24809610/GettyImages_1245582733.jpg",
+		urlToImage: "",
 		publishedAt: "2023-07-26T12:30:00Z",
 		content:
 			"The International Energy Agency expects the world to invest about a billion dollars a day into solar in 2023, marking the first time the renewable has surpassed global investment in oil production. I… [+10580 chars]",
@@ -845,7 +842,7 @@ const articles = [
 		},
 		author: "Adam",
 		title:
-			"Elon Musk Changes X Logo—And Then Changes It Back Again—As Twitter Rebrand Evolves",
+			"Elon Musk Changes X Logo—And Then Changes It Back Again—As Twitter Rebrand Evolve",
 		description:
 			"Topline Elon Musk on Tuesday changed X’s logo—and changed it back again—just days after replacing Twitter’s blue bird, as he embarks on the platform’s swift rebrand into an “everything app” that has surprised onlookers with...read more\nThe post Elon Musk Chan…",
 		url:
@@ -942,7 +939,7 @@ const articles = [
 			name: "Investing.com",
 		},
 		author: "Reuters",
-		title: "Stellantis CEO says Tesla margins hurt as EV maker faces reality check",
+		title: "Stellantis CEO says Tesla margins hurt as EV maker faces reality check.",
 		description:
 			"Stellantis CEO says Tesla margins hurt as EV maker faces reality check",
 		url:
@@ -958,7 +955,7 @@ const articles = [
 			name: "Biztoc.com",
 		},
 		author: "reuters.com",
-		title: "Stellantis CEO says Tesla margins hurt as EV maker faces reality check",
+		title: "Stellantis CEO says Tesla margins hurt as EV maker faces reality chec",
 		description:
 			'head Carlos Tavares said on Wednesday that the profitability of Tesla (TSLA.O) was declining as the rival U.S. automaker entered the real world of manufacturing and competition. "They are entering my world, the world of tight pricing, cost competitiveness, an…',
 		url: "https://biztoc.com/x/86b2f35ed95aa197",
@@ -973,7 +970,7 @@ const articles = [
 			name: "Marketscreener.com",
 		},
 		author: "Reuters",
-		title: "Stellantis CEO says Tesla margins hurt as EV maker faces reality check",
+		title: "Stellantis CEO says Tesla margins hurt as EV maker faces reality check!",
 		description:
 			"(marketscreener.com) Stellantis head Carlos Tavares said on Wednesday that the profitability of Tesla was declining as the rival U.S. automaker entered the real world of manufacturing and competition. https://www.marketscreener.com…",
 		url:
@@ -990,7 +987,7 @@ const articles = [
 			name: "Yahoo Entertainment",
 		},
 		author: "Reuters",
-		title: "Stellantis CEO says Tesla margins hurt as EV maker faces reality check",
+		title: "Stellantis CEO says Tesla margins hurt as EV maker faces reality...",
 		description:
 			"Stellantis head Carlos Tavares said on Wednesday that the profitability of Tesla was declining as the rival U.S. automaker entered the real world of...",
 		url:
@@ -1040,8 +1037,7 @@ const articles = [
 			id: null,
 			name: "Forbes",
 		},
-		author:
-			"Ian Wilding, Forbes Councils Member",
+		author: "Ian Wilding, Forbes Councils Member",
 		title: "Touching Lives: The Art Of Creating Micro-Impacts With Your Product",
 		description:
 			"In the long run, micro-impacts can translate into macro returns for businesses.",
@@ -1242,7 +1238,7 @@ const articles = [
 		author: "Reuters",
 		title: "In Mexico, private cash races to plug nearshoring energy crunch",
 		description:
-			"(marketscreener.com) For Mexican industrial park owners like Sergio Bermudez, business is booming amid a wave of U.S businesses setting up over the border.https://www.marketscreener.com/quote/stock/GRID-INC-155977427/news/In-Mexico-private-cash-races-to-plug-…",
+			"(marketscreener.com) For Mexican industrial park owners like Sergio Bermudez, business is booming amid a wave of U.S businesses setting up over the border https://www.marketscreener.com/…",
 		url:
 			"https://www.marketscreener.com/quote/stock/GRID-INC-155977427/news/In-Mexico-private-cash-races-to-plug-nearshoring-energy-crunch-44422818/",
 		urlToImage:
@@ -1346,7 +1342,7 @@ const articles = [
 		},
 		author: "fortune.com",
 		title:
-			"Teslas barred from China’s World University Games in Chengdu ahead of a Xi visit",
+			"Teslas barred from China’s World University Games in Chengdu ahead of a Xi vis",
 		description:
 			"Tesla Inc. vehicles are barred from parts of a major Chinese city as it prepares for a visit by President Xi Jinping for the start of the World University Games on Friday, according to people familiar with the matter. Authorities in Chengdu, a city of 21 mill…",
 		url: "https://biztoc.com/x/6aa11e838d46806a",
@@ -1594,7 +1590,7 @@ const articles = [
 		author: "MarketScreener with dpa-AFX Analyser",
 		title: "JUST EAT TAKEAWAY.COM : Bernstein reiterates its Neutral rating",
 		description:
-			"(marketscreener.com) Bernstein analyst William Woods maintains his Neutral opinion on the stock. The target price is still set at EUR 27.https://www.marketscreener.com/quote/stock/JUST-EAT-TAKEAWAY-COM-N-V-31472057/news/JUST-EAT-TAKEAWAY-COM-Bernstein-reitera…",
+			"(marketscreener.com) Bernstein analyst William Woods maintains his Neutral opinion on the stock. The target price is still set at EUR 27…",
 		url:
 			"https://www.marketscreener.com/quote/stock/JUST-EAT-TAKEAWAY-COM-N-V-31472057/news/JUST-EAT-TAKEAWAY-COM-Bernstein-reiterates-its-Neutral-rating-44421633/",
 		urlToImage: "https://www.marketscreener.com/images/twitter_MS_fdblanc.png",

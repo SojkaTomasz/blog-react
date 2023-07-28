@@ -15,7 +15,7 @@
 }
 
 .logo {
-	padding-left: 15px;
+	padding-left: 10px;
 	font-size: 35px;
 	color: white;
 	text-decoration: none;
@@ -53,6 +53,7 @@
 	padding: 10px;
 	height: 100%;
 	width: 100%;
+	font-size: 18px;
 	font-weight: bold;
 	text-transform: uppercase;
 	text-decoration: none;
@@ -95,6 +96,11 @@ li:hover {
 
 @media (min-width: 576px) {
 }
+@media (min-width: 768px) {
+	.headerNav {
+		justify-content: center;
+	}
+}
 
 @media (min-width: 768px) {
 	ul {
@@ -113,7 +119,6 @@ li:hover {
 	}
 	.logo {
 		font-size: 40px;
-		/* margin-top: 20px; */
 	}
 	.nav {
 		width: 200px;

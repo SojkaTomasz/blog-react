@@ -1,5 +1,5 @@
 import { BrowserRouter as Router } from "react-router-dom"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import LoginContext from "../context/loginContext"
 import Header from "./Header"
 import Navigation from "./Navigation"
@@ -8,17 +8,32 @@ import Footer from "./Footer"
 import "../styles/App.css"
 
 function App() {
-	const [logged, setLogged] = useState(false)
+	const [isLogged, setIsLogged] = useState(false)
+	useEffect(() => {
+		const checkUser = () => {
+			const tokenData = JSON.parse(window.localStorage.getItem("token-data"))
+
+			// const tokenData = window.localStorage.getItem("token-data")
+			if (tokenData) {
+				setIsLogged(true)
+			} else {
+				setIsLogged(false)
+			}
+		}
+		checkUser()
+	}, [])
 
 	return (
 		<LoginContext.Provider
 			value={{
-				logged: logged,
-				login: () => {
-					setLogged(true)
+				isLogged: isLogged,
+				login: tokenData => {
+					setIsLogged(true)
+					window.localStorage.setItem("token-data", JSON.stringify(tokenData))
 				},
 				logout: () => {
-					setLogged(false)
+					setIsLogged(false)
+					window.localStorage.removeItem("token-data")
 				},
 			}}
 		>

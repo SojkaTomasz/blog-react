@@ -11,15 +11,11 @@ const list = [
 
 function Navigation() {
 	const [activeNav, setActiveNav] = useState(false)
-	const logged = useContext(LoginContext)
+	const isLogged = useContext(LoginContext)
 
 	const menu = list.map(link => (
 		<li key={link.name}>
-			<NavLink
-				className='linkNav'
-				to={link.path}
-				onClick={() => setActiveNav(false)}
-			>
+			<NavLink className='linkNav' to={link.path} onClick={() => setActiveNav(false)}>
 				{link.name}
 			</NavLink>
 		</li>
@@ -28,7 +24,7 @@ function Navigation() {
 	return (
 		<nav className='nav'>
 			<div className='headerNav'>
-				<h2 className='logo'>
+				<h2>
 					<Link onClick={() => setActiveNav(false)} className='logo' to='/'>
 						Loo<span>Go</span>
 					</Link>
@@ -53,19 +49,19 @@ function Navigation() {
 					<NavLink
 						onClick={() => setActiveNav(false)}
 						className='linkNav'
-						to={logged.logged ? "/panel-uzytkownika" : "/login"}
+						to={isLogged.isLogged ? "/panel-uzytkownika" : "/login"}
 					>
-						{logged.logged ? "Panel" : "Zaloguj"}
+						{isLogged.isLogged ? "Panel" : "Logowanie"}
 					</NavLink>
 				</li>
-				{logged.logged || (
+				{isLogged.isLogged || (
 					<li>
 						<NavLink
 							onClick={() => setActiveNav(false)}
 							className='linkNav'
 							to='/rejestracja'
 						>
-							Zarejestruj
+							Rejestracja
 						</NavLink>
 					</li>
 				)}

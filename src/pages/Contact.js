@@ -1,68 +1,78 @@
 import { useEffect, useState } from "react"
 import "../styles/form.css"
-
-const reg =
-	/^([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22))*\x40([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d))*(\.\w{2,})+$/
-
-const pattern = /^([0-9]{9})$/
+import { useReducer } from "react"
+import { initialState, reducer } from "../reducer/reducerForm"
+import { reg, pattern } from "../UI/validation"
+import { useNavigate } from "react-router-dom"
 
 function Contact() {
-	const [email, setEmail] = useState("")
-	const [tel, setTel] = useState("")
-	const [message, setMessage] = useState("")
-	const [messageSent, setMessageSent] = useState(false)
+	const [state, dispatch] = useReducer(reducer, initialState)
+	const navigate = useNavigate()
 
-	const [emailIsActive, setEmailIsActive] = useState(false)
-	const [telIsActive, setTelIsActive] = useState(false)
+	const {
+		email,
+		errorEmail,
+		emailToggle,
 
-	const [errorEmail, setErrorEmail] = useState("")
-	const [errorTel, setErrorTel] = useState("")
-	const [errorMessage, setErrorMessage] = useState("")
+		tel,
+		errorTel,
+		telToggle,
 
-	const [messageIsActive, setMessageIsActive] = useState(false)
+		message,
+		errorMessage,
+		messageToggle,
+
+		success,
+	} = state
 
 	const send = e => {
 		e.preventDefault()
 		if (!email) {
-			setErrorEmail("Musisz podać emaila!")
+			dispatch({ type: "errorEmail", errorEmail: "Musisz podać emaila!" })
 		} else if (!reg.test(email)) {
-			setErrorEmail("Email niepoprawny!")
+			dispatch({ type: "errorEmail", errorEmail: "Email niepoprawny!" })
 		} else {
-			setErrorEmail("")
-			setEmailIsActive(true)
+			dispatch({ type: "errorEmail", errorEmail: "" })
+			dispatch({ type: "emailToggle", emailToggle: true })
 		}
 
 		if (!tel) {
-			setErrorTel("Musisz podać telefon!")
+			dispatch({ type: "errorTel", errorTel: "Musisz podać telefon!" })
 		} else if (!pattern.test(tel)) {
-			setErrorTel('Zła wartość! Podaj 9 cyfr bez spacji i " - "!')
+			dispatch({
+				type: "errorTel",
+				errorTel: 'Zła wartość! Podaj 9 cyfr bez spacji i " - "!',
+			})
 		} else {
-			setErrorTel("")
-			setTelIsActive(true)
+			dispatch({ type: "errorTel", errorTel: "" })
+			dispatch({ type: "telToggle" })
 		}
 
 		if (message.length < 5) {
-			setErrorMessage("Musisz podać min 5 znaków!")
+			dispatch({ type: "errorMessage", errorMessage: "Musisz podać min 5 znaków!" })
 		} else {
-			setErrorMessage("")
-			setMessageIsActive(true)
+			dispatch({ type: "errorMessage", errorMessage: "" })
+			dispatch({ type: "messageToggle" })
 		}
 	}
 
 	useEffect(() => {
-		if (emailIsActive && telIsActive && messageIsActive) {
-			setTimeout(() => {
-				setMessageSent(true)
-			}, 800)
+		if (emailToggle && telToggle && messageToggle) {
+			dispatch({ type: "success", success: true })
 		}
-	}, [emailIsActive, telIsActive, messageIsActive])
+	}, [emailToggle, telToggle, messageToggle])
 
-	return (
-		<div>
-			<h1 className='title-section'>Kontakt</h1>
-			{messageSent ? (
+	if (success) {
+		return (
+			<div>
+				<h1 className='title-section'>Kontakt</h1>
 				<p className='success'>Wiadomość wysłana poprawnie! Niebawem się odezwiemy.</p>
-			) : (
+			</div>
+		)
+	} else {
+		return (
+			<div>
+				<h1 className='title-section'>Kontakt</h1>
 				<form className='form-contact' action=''>
 					<div className='box-email-tel'>
 						<div>
@@ -73,7 +83,7 @@ function Contact() {
 								id='email'
 								value={email}
 								required
-								onChange={e => setEmail(e.target.value)}
+								onChange={e => dispatch({ type: "email", email: e.target.value })}
 							/>
 							{!errorEmail || <p className='error'>{errorEmail}</p>}
 						</div>
@@ -85,7 +95,7 @@ function Contact() {
 								it='tel'
 								required
 								value={tel}
-								onChange={e => setTel(e.target.value)}
+								onChange={e => dispatch({ type: "tel", tel: e.target.value })}
 							/>
 							{!errorTel || <p className='error'>{errorTel}</p>}
 						</div>
@@ -96,7 +106,7 @@ function Contact() {
 						id='message'
 						value={message}
 						type='textarea'
-						onChange={e => setMessage(e.target.value)}
+						onChange={e => dispatch({ type: "message", message: e.target.value })}
 						rows='10'
 						required
 					></textarea>
@@ -104,9 +114,9 @@ function Contact() {
 					<input className={`submit`} onClick={send} type='submit' value='Wyślij' />
 					<div></div>
 				</form>
-			)}
-		</div>
-	)
+			</div>
+		)
+	}
 }
 
 export default Contact

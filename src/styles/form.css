@@ -8,7 +8,7 @@
 	font-weight: bold;
 	left: 100%;
 	transform: translateX(-100%);
-	padding: 5px 10px;
+	padding: 8px 10px;
 	background-color: yellowgreen;
 	color: white;
 	border: none;
@@ -17,6 +17,17 @@
 	margin-top: 5px;
 	cursor: pointer;
 	transition: background-color 0.4s;
+}
+
+.error-register{
+	background-color: tomato;
+	width: 80%;
+	margin: 10px auto;
+	padding: 10px;
+	text-align: center;
+	border-radius: 5px;
+	border: 2px solid red;
+	animation: animation-error 0.4s;
 }
 
 .submit:hover {
@@ -113,3 +124,5 @@ textarea {
 		width: 70%;
 	}
 }
+
+

@@ -5,7 +5,7 @@ import LoginContext from "../context/loginContext"
 import Pagination from "../components/Blogs/Pagination"
 import Filter from "../components/Blogs/Filter"
 import Preloader from "../UI/Preloader"
-import data from "../data"
+import articleData from "../data/articleData"
 import axios from "axios"
 import Articles from "./Articles"
 import "../styles/blog.css"
@@ -17,7 +17,8 @@ const Blog = () => {
 	const [state, dispatch] = useReducer(reducer, initialState)
 	const toPage = state.currentPage * state.blogsPerPage
 	const fromPage = toPage - state.blogsPerPage
-	const logged = useContext(LoginContext)
+	const isLogged = useContext(LoginContext)
+	
 
 	useEffect(() => {
 		dispatch({ type: "setCurrentPage", currentPage: 1 })
@@ -33,7 +34,8 @@ const Blog = () => {
 		// 	.catch(error => {
 		// 		console.error("Error fetching data:", error)
 		// 	})
-		dispatch({ type: "setState", state: data })
+
+		dispatch({ type: "setState", state: articleData })
 		dispatch({ type: "setGetData" })
 	}, [])
 
@@ -80,20 +82,18 @@ const Blog = () => {
 		<Articles key={id} id={id} {...blog} valueSearch={state.valueSearch} />
 	))
 
-	if (!logged.logged) {
+	if (!isLogged.isLogged) {
 		return (
 			<>
 				<h1 className='title-section'>Blog</h1>
 				<p>Musisz się zalogować aby zobaczyć treść</p> <br />
 				<Link className='link' to='/login'>{`>> Logowanie`}</Link>
-				<br />
 				<Link className='link' to='/rejestracja'>{`>> Rejestracja`}</Link>
 			</>
 		)
 	} else {
 		return (
 			<>
-				<Link to='/'>Home</Link> / <span>blog</span>
 				<h1 className='title-section'>Blog</h1>
 				{state.getData ? (
 					<div>

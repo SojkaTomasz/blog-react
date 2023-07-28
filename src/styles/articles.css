@@ -8,6 +8,20 @@ img {
 	transition: 0.4s;
 }
 
+.title-article {
+	text-decoration: none;
+	color: #1b1b1b;
+	transition: 0.4s;
+}
+
+.title-article:hover {
+	color: yellowgreen;
+}
+
+.title-article:hover > .highlighted {
+	color: rgb(255, 255, 255);
+}
+
 @media (min-width: 576px) {
 	img {
 		width: 250px;

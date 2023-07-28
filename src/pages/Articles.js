@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import noFoto from "../images/no-image-available.png"
+import noPhoto from "../images/no-image-available.jpg"
 import "../styles/articles.css"
 
 function Articles({
@@ -29,12 +29,13 @@ function Articles({
 				{urlToImage ? (
 					<img src={urlToImage} alt={title} />
 				) : (
-					<img src={noFoto} alt='brak zdjęcia' />
+					<img src={noPhoto} alt='brak zdjęcia' />
 				)}
 			</div>
 			<div>
 				<h2 className='title-articles'>
 					<Link
+						className='title-article'
 						to={`/blog/${encodeURIComponent(title.replace("%", "%25"))}`}
 						author={author}
 						dangerouslySetInnerHTML={{ __html: highlightedTitle() }}

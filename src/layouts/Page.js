@@ -13,11 +13,11 @@ function Page() {
 	return (
 		<Routes>
 			<Route path='/' element={<Home />} />
-			<Route path='/blog/' element={<Blog />} />
+			<Route path='/blog' element={<Blog />} />
 			<Route path='/blog/:id' element={<Article />} />
 			<Route path='/kontakt' element={<Contact />} />
 			<Route path='/login' element={<Login />} />
-			{!LoginContext._currentValue.logged || (
+			{!LoginContext._currentValue.isLogged || (
 				<Route path='/panel-uzytkownika' element={<UserPanel />} />
 			)}
 			<Route path='/rejestracja' element={<Registration />} />

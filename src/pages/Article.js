@@ -1,8 +1,9 @@
 import { Link, useParams } from "react-router-dom"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
+import LoginContext from "../context/loginContext"
 import Preloader from "../UI/Preloader"
-import noFoto from "../images/no-image-available.png"
-import data from "../data"
+import noPhoto from "../images/no-image-available.jpg"
+import articleData from "../data/articleData"
 import axios from "axios"
 import "../styles/article.css"
 
@@ -11,6 +12,7 @@ const HTTPS_URL = `https://newsapi.org/v2/everything?q=bitcoin&from=2023-06-26&s
 
 function Article() {
 	const [dateArticle, setDateArticle] = useState(null)
+	const isLogged = useContext(LoginContext)
 	const { id } = useParams()
 
 	useEffect(() => {
@@ -23,7 +25,7 @@ function Article() {
 		// 	.catch(error => {
 		// 		console.error("Error fetching data:", error)
 		// 	})
-		const article = data.find(article => article.title === id)
+		const article = articleData.find(article => article.title === id)
 		setDateArticle(article)
 	}, [id])
 
@@ -35,31 +37,46 @@ function Article() {
 		dateArticle
 	const date = new Date(publishedAt).toLocaleString()
 
-	return (
-		<article className='article'>
-			<h1 className='title-section title-section-article'>Artykuł</h1>
-			<Link to='/'>Home</Link> / <Link to='/blog'>blog</Link> / <span>{title}</span>
-			<div className='img'>
-				{urlToImage ? (
-					<img src={urlToImage} alt={title} />
-				) : (
-					<img src={noFoto} alt='brak zdjęcia' />
-				)}
-			</div>
-			<h2 className='title-article'>{title}</h2>
-			<p>
-				<strong>Autor:</strong> <em>{author}</em>
-			</p>
-			<p>
-				<strong> Data publikacji:</strong> {date}
-			</p>
-			<p>
-				<strong> Żródło:</strong> {source.name}
-			</p>
-			<p>{description}</p>
-			<a href={url}>{`>> Zobacz cały artykuł`}</a>
-		</article>
-	)
+	if (!isLogged.isLogged) {
+		return (
+			<>
+				<h1 className='title-section'>Blog</h1>
+				<p>Musisz się zalogować aby zobaczyć treść</p> <br />
+				<Link className='link' to='/login'>{`>> Logowanie`}</Link>
+				<Link className='link' to='/rejestracja'>{`>> Rejestracja`}</Link>
+			</>
+		)
+	} else {
+		return (
+			<article className='article'>
+				<h1 className='title-section title-section-article'>Artykuł</h1>
+				<Link className="link" to='/blog'>{`<< Powrót do bloga`}</Link>
+				<div className='img'>
+					{urlToImage ? (
+						<img src={urlToImage} alt={title} />
+					) : (
+						<img src={noPhoto} alt='brak zdjęcia' />
+					)}
+				</div>
+				<h2 className='title-article'>{title}</h2>
+				<p>
+					<strong>Autor:</strong> <em>{author}</em>
+				</p>
+				<p>
+					<strong> Data publikacji:</strong> {date}
+				</p>
+				<p>
+					<strong> Żródło:</strong> {source.name}
+				</p>
+				<p>{description}</p>
+				<a
+				className="link"
+					style={{textAlign: "end" }}
+					href={url}
+				>{`Zobacz cały artykuł >> `}</a>
+			</article>
+		)
+	}
 }
 
 export default Article
