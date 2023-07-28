@@ -14,18 +14,22 @@ function Navigation() {
 	const isLogged = useContext(LoginContext)
 
 	const menu = list.map(link => (
-		<li key={link.name}>
-			<NavLink className='linkNav' to={link.path} onClick={() => setActiveNav(false)}>
+		<li className='li-nav' key={link.name}>
+			<NavLink
+				className='link-nav'
+				to={link.path}
+				onClick={() => setActiveNav(false)}
+			>
 				{link.name}
 			</NavLink>
 		</li>
 	))
 
 	return (
-		<nav className='nav'>
-			<div className='headerNav'>
+		<nav className='box-nav'>
+			<div className='header-nav'>
 				<h2>
-					<Link onClick={() => setActiveNav(false)} className='logo' to='/'>
+					<Link onClick={() => setActiveNav(false)} className='logo-nav' to='/'>
 						Loo<span>Go</span>
 					</Link>
 				</h2>
@@ -43,12 +47,12 @@ function Navigation() {
 					)}
 				</div>
 			</div>
-			<ul className={`ulListNav ${activeNav ? "ulListNavActive" : null}`}>
+			<ul className={`list-nav ${activeNav ? "list-nav-active" : null}`}>
 				{menu}
-				<li>
+				<li className='li-nav'>
 					<NavLink
 						onClick={() => setActiveNav(false)}
-						className='linkNav'
+						className='link-nav'
 						to={isLogged.isLogged ? "/panel-uzytkownika" : "/login"}
 					>
 						{isLogged.isLogged ? "Panel" : "Logowanie"}
@@ -58,7 +62,7 @@ function Navigation() {
 					<li>
 						<NavLink
 							onClick={() => setActiveNav(false)}
-							className='linkNav'
+							className='link-nav'
 							to='/rejestracja'
 						>
 							Rejestracja

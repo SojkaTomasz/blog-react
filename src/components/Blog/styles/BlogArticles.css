@@ -1,4 +1,4 @@
-.box-blog-articles{
+.box-blog-articles {
 	margin: 20px 0;
 }
 
@@ -9,14 +9,14 @@
 
 .highlighted-blog-articles {
 	background-color: yellowgreen;
-	transition: 0.4s;
+	transition: color 0.4s;
 }
 
 .title-blog-articles {
 	font-size: 20px;
 	text-decoration: none;
 	color: #1b1b1b;
-	transition: 0.4s;
+	transition: color 0.4s;
 }
 
 .title-blog-articles:hover {
