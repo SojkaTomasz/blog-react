@@ -1,0 +1,26 @@
+.box-form-user-panel {
+
+
+}
+
+.box-user-panel {
+
+}
+
+.btn-user-panel {
+	display: inline;
+	font-size: 16px;
+}
+
+.label{
+   display: block;
+}
+
+.error-user-panel{
+	text-align: left;
+}
+
+.success-user-panel{
+	font-weight: bold;
+	color: yellowgreen;
+}

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useReducer, useState } from "react"
+import { useContext, useEffect, useReducer } from "react"
 import { useNavigate } from "react-router-dom"
 import LoginContext from "../context/loginContext"
 import { initialState, reducer } from "../reducer/reducerForm"
@@ -11,7 +11,7 @@ const HTTPS_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key
 
 function Registration() {
 	const [state, dispatch] = useReducer(reducer, initialState)
-	const isLogged = useContext(LoginContext)
+	const loginContext = useContext(LoginContext)
 	const navigate = useNavigate()
 
 	const {
@@ -30,7 +30,7 @@ function Registration() {
 		success,
 	} = state
 
-	const handleRegister = async e => {
+	const handleRegister = e => {
 		e.preventDefault()
 		if (!email) {
 			dispatch({ type: "errorEmail", errorEmail: "Musisz podać emaila!" })
@@ -91,10 +91,10 @@ function Registration() {
 					dispatch({ type: "success", success: true })
 
 					setTimeout(() => {
-						isLogged.login({
+						loginContext.login({
 							email: res.data.email,
-							token: res.data.idToken,
-							userId: res.data.localId,
+							idToken: res.data.idToken,
+							localId: res.data.localId,
 						})
 						navigate("/panel-uzytkownika")
 					}, 5000)
@@ -107,14 +107,7 @@ function Registration() {
 			}
 		}
 		fetchData()
-	}, [
-		emailToggle,
-		passwordToggle,
-		repeatPasswordToggle,
-		email,
-		password,
-		repeatPassword,
-	])
+	}, [emailToggle, passwordToggle, repeatPasswordToggle])
 
 	if (success) {
 		return (

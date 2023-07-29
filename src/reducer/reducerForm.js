@@ -19,12 +19,14 @@ export const initialState = {
 	errorRepeatPassword: "",
 	repeatPasswordToggle: false,
 
-
 	error: "",
 	errorToggle: false,
 
 	success: false,
-
+	changeEmailToggle: false,
+	changeEmailSuccess: "",
+	changePasswordToggle: false,
+	changePasswordSuccess: "",
 }
 
 export const reducer = (state, action) => {
@@ -64,13 +66,23 @@ export const reducer = (state, action) => {
 		case "repeatPasswordToggle":
 			return { ...state, repeatPasswordToggle: true }
 
-			case "error":
+		case "error":
 			return { ...state, error: action.error }
 		case "repeatToggle":
 			return { ...state, repeatToggle: true }
 
 		case "success":
 			return { ...state, success: action.success }
+
+		case "changeEmailToggle":
+			return { ...state, changeEmailToggle: action.changeEmailToggle }
+		case "changeEmailSuccess":
+			return { ...state, changeEmailSuccess: action.changeEmailSuccess }
+
+		case "changePasswordToggle":
+			return { ...state, changePasswordToggle: action.changePasswordToggle }
+		case "changePasswordSuccess":
+			return { ...state, changePasswordSuccess: action.changePasswordSuccess }
 
 		default:
 			throw new Error(action.type)

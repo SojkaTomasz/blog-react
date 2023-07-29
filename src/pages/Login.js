@@ -10,21 +10,10 @@ const HTTPS_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signInWith
 
 function Login() {
 	const [state, dispatch] = useReducer(reducer, initialState)
-	const isLogged = useContext(LoginContext)
+	const loginContext = useContext(LoginContext)
 	const navigate = useNavigate()
 
-	const {
-		email,
-		errorEmail,
-		emailToggle,
-
-		password,
-		errorPassword,
-		passwordToggle,
-
-		error,
-		errorToggle,
-	} = state
+	const { email, password, error } = state
 
 	const handleLogin = e => {
 		e.preventDefault()
@@ -36,11 +25,11 @@ function Login() {
 					password,
 					returnSecureToken: true,
 				})
-				console.log(res.data)
-				isLogged.login({
+
+				loginContext.login({
 					email: res.data.email,
-					token: res.data.idToken,
-					userId: res.data.localId,
+					idToken: res.data.idToken,
+					localId: res.data.localId,
 				})
 				navigate("/panel-uzytkownika")
 			} catch (ex) {
@@ -80,7 +69,12 @@ function Login() {
 					onChange={e => dispatch({ type: "password", password: e.target.value })}
 				/>
 				{!error || <p className='form-error'>{error}</p>}
-				<input className='btn-form btn-form-login' onClick={handleLogin} type='submit' value='Zaloguj' />
+				<input
+					className='btn-form btn-form-login'
+					onClick={handleLogin}
+					type='submit'
+					value='Zaloguj'
+				/>
 			</form>
 		</div>
 	)

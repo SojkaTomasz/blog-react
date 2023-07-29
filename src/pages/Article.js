@@ -12,7 +12,7 @@ const HTTPS_URL = `https://newsapi.org/v2/everything?q=bitcoin&from=2023-06-26&s
 
 function Article() {
 	const [dateArticle, setDateArticle] = useState(null)
-	const isLogged = useContext(LoginContext)
+	const loginContext = useContext(LoginContext)
 	const { id } = useParams()
 
 	useEffect(() => {
@@ -37,7 +37,7 @@ function Article() {
 		dateArticle
 	const date = new Date(publishedAt).toLocaleString()
 
-	if (!isLogged.isLogged) {
+	if (!loginContext.isLogged) {
 		return (
 			<>
 				<h1 className='title-section'>Blog</h1>

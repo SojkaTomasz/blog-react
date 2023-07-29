@@ -9,13 +9,14 @@ import "../styles/App.css"
 
 function App() {
 	const [isLogged, setIsLogged] = useState(false)
+	const [dateUser, setDateUser] = useState(null)
+
 	useEffect(() => {
 		const checkUser = () => {
 			const tokenData = JSON.parse(window.localStorage.getItem("token-data"))
-
-			// const tokenData = window.localStorage.getItem("token-data")
 			if (tokenData) {
 				setIsLogged(true)
+				setDateUser(tokenData)
 			} else {
 				setIsLogged(false)
 			}
@@ -27,12 +28,15 @@ function App() {
 		<LoginContext.Provider
 			value={{
 				isLogged: isLogged,
+				dateUser: dateUser,
 				login: tokenData => {
 					setIsLogged(true)
+					setDateUser(tokenData)
 					window.localStorage.setItem("token-data", JSON.stringify(tokenData))
 				},
 				logout: () => {
 					setIsLogged(false)
+					setDateUser(null)
 					window.localStorage.removeItem("token-data")
 				},
 			}}
