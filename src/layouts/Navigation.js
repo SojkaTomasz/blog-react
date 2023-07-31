@@ -59,7 +59,7 @@ function Navigation() {
 					</NavLink>
 				</li>
 				{isLogged.isLogged || (
-					<li>
+					<li className='li-nav'>
 						<NavLink
 							onClick={() => setActiveNav(false)}
 							className='link-nav'

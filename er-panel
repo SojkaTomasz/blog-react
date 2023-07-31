@@ -1,0 +1,12 @@
+* [33m9d67c17[m[33m ([m[1;36mHEAD -> [m[1;32mdevelopment-user-panel[m[33m, [m[1;31morigin/development-user-panel[m[33m)[m development-user-panel: support to change email address and password
+* [33m2b292df[m[33m ([m[1;31morigin/main[m[33m, [m[1;32mrefactoring-css[m[33m, [m[1;32mmain[m[33m)[m refactoring header styles
+* [33mc9924ab[m refactoring navigation styles
+* [33m5ab7e8b[m refactoring the styles of the blog, article and their components
+* [33mba057d6[m refactoring of login, registration, contact and user panel forms
+*   [33m0ba88d4[m Merge branch 'main' of https://github.com/SojkaTomasz/blog-react
+[32m|[m[33m\[m  
+[32m|[m * [33m5529d3c[m Update README.md
+* [33m|[m [33mac1438d[m[33m ([m[1;32mpagination-development[m[33m)[m adding smooth scrolling when pagination button is clicked
+[33m|[m[33m/[m  
+* [33m798cbe7[m[33m ([m[1;32mforms[m[33m)[m form validation, registration and login support
+* [33m04f1865[m Blog in React

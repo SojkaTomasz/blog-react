@@ -5,7 +5,7 @@ import Blog from "../pages/Blog"
 import Article from "../pages/Article"
 import Contact from "../pages/Contact"
 import Login from "../pages/Login"
-import UserPanel from "../pages/UserPanel"
+import UserPanel from "../pages/UserPanel/UserPanel"
 import Registration from "../pages/Registration"
 import ErrorPage from "../pages/ErrorPage"
 
@@ -18,7 +18,7 @@ function Page() {
 			<Route path='/kontakt' element={<Contact />} />
 			<Route path='/login' element={<Login />} />
 			{!LoginContext._currentValue.isLogged || (
-				<Route path='/panel-uzytkownika' element={<UserPanel />} />
+				<Route path='/panel-uzytkownika/*' element={<UserPanel />} />
 			)}
 			<Route path='/rejestracja' element={<Registration />} />
 			<Route path='*' element={<ErrorPage />} />
