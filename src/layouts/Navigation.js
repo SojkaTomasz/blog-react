@@ -3,21 +3,21 @@ import { useContext, useState } from "react"
 import LoginContext from "../context/loginContext"
 import "../styles/navigation.css"
 
-const list = [
-	{ name: "Start", path: "/" },
-	{ name: "Blog", path: "/blog" },
-	{ name: "Kontakt", path: "/kontakt" },
+const navigationItems = [
+	{ name: "Start", to: "/" },
+	{ name: "Blog", to: "/blog" },
+	{ name: "Kontakt", to: "/kontakt" },
 ]
 
 function Navigation() {
 	const [activeNav, setActiveNav] = useState(false)
 	const isLogged = useContext(LoginContext)
 
-	const menu = list.map(link => (
+	const menu = navigationItems.map(link => (
 		<li className='li-nav' key={link.name}>
 			<NavLink
 				className='link-nav'
-				to={link.path}
+				to={link.to}
 				onClick={() => setActiveNav(false)}
 			>
 				{link.name}

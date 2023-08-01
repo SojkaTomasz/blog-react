@@ -1,9 +1,16 @@
 import { useContext, useEffect } from "react"
-import { Route, Routes, useNavigate, NavLink } from "react-router-dom"
+import { Route, Routes, useNavigate, NavLink, Link } from "react-router-dom"
 import LoginContext from "../../context/loginContext"
 import Settings from "./Settings"
 import AddArticle from "./AddArticle"
+import AllArticles from "./AllArticles"
 import "../../styles/userPanel.css"
+
+const navigationItems = [
+	{ name: "Edytuj profil", to: "ustawienia" },
+	{ name: "Wszystkie artykuły", to: "wszystkie-artykuły" },
+	{ name: "Dodaj artykuł", to: "dodaj-artykul" },
+]
 
 function UserPanel() {
 	const loginContext = useContext(LoginContext)
@@ -15,40 +22,38 @@ function UserPanel() {
 		navigate("/login")
 	}
 
-	useEffect(() => navigate("/panel-uzytkownika/ustawienia"), [])
+	useEffect(() => {
+		navigate("/panel-uzytkownika/ustawienia")
+		if (!loginContext.isLogged) {
+			navigate("/login")
+		}
+	}, [loginContext.isLogged])
 
 	return (
 		<div>
 			<h1 className='title-section'>Panel Użytkownika</h1>
-			<ul className='box-pagination-user-panel'>
-				<li className='items-link-user-panel'>
-					<NavLink
-						className={({ isActive }) =>
-							isActive ? "active-link-user-panel link-user-panel" : "link-user-panel"
-						}
-						to='ustawienia'
-					>
-						Edytuj profil
-					</NavLink>
-				</li>
-				<li className='items-link-user-panel'>
-					<NavLink
-						className={({ isActive }) =>
-							isActive ? "active-link-user-panel link-user-panel" : "link-user-panel"
-						}
-						to='dodaj-artykul'
-					>
-						Dodaj Artykuł
-					</NavLink>
-				</li>
-				<li className='items-link-user-panel'>
-					<a className='link-user-panel' onClick={handleLogin}>
+			<ul className='box-nav-user-panel'>
+				{navigationItems.map((item, id) => (
+					<li key={id} className='item-nav-user-panel'>
+						<NavLink
+							className={({ isActive }) =>
+								isActive ? "active-link-user-panel link-user-panel" : "link-user-panel"
+							}
+							to={item.to}
+						>
+							{item.name}
+						</NavLink>
+					</li>
+				))}
+				<li className='item-nav-user-panel'>
+					<Link className='link-user-panel' onClick={handleLogin}>
 						Wyloguj
-					</a>
+					</Link>
 				</li>
 			</ul>
 			<Routes>
 				<Route path='ustawienia' element={<Settings />} />
+				<Route path='wszystkie-artykuły' element={<AllArticles />} />
 				<Route path='dodaj-artykul' element={<AddArticle />} />
 			</Routes>
 		</div>

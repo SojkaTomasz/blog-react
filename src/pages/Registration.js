@@ -5,9 +5,9 @@ import { initialState, reducer } from "../reducer/reducerForm"
 import { reg, specialChars } from "../UI/validation"
 import axios from "axios"
 import "../styles/form.css"
+import { firebaseConfig } from "../firebase"
 
-const FIREBASE_API_KEY = process.env.REACT_APP_FIREBASE_API_KEY
-const HTTPS_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${FIREBASE_API_KEY}`
+const HTTPS_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${firebaseConfig.apiKey}`
 
 function Registration() {
 	const [state, dispatch] = useReducer(reducer, initialState)
@@ -108,6 +108,12 @@ function Registration() {
 		}
 		fetchData()
 	}, [emailToggle, passwordToggle, repeatPasswordToggle])
+
+	useEffect(() => {
+		if (loginContext.isLogged) {
+			navigate("/panel-uzytkownika")
+		}
+	}, [loginContext])
 
 	if (success) {
 		return (

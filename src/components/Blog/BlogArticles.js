@@ -3,14 +3,15 @@ import noPhoto from "../../images/no-image-available.jpg"
 import "./styles/blogArticles.css"
 
 function BlogArticles({
+	id,
 	title,
-	publishedAt,
-	urlToImage,
+	datePublication,
+	image,
 	author,
 	description,
 	valueSearch,
 }) {
-	const date = new Date(publishedAt).toLocaleString()
+	const date = new Date(datePublication).toLocaleString()
 
 	const highlightedTitle = () => {
 		if (valueSearch && title.toLowerCase().includes(valueSearch.toLowerCase())) {
@@ -26,10 +27,10 @@ function BlogArticles({
 	return (
 		<article className='box-blog-articles'>
 			<div>
-				{urlToImage ? (
-					<img className="img-blog-articles" src={urlToImage} alt={title} />
+				{image ? (
+					<img className='img-blog-articles' src={image} alt={title} />
 				) : (
-					<img className="img-blog-articles" src={noPhoto} alt='brak zdjęcia' />
+					<img className='img-blog-articles' src={noPhoto} alt='brak zdjęcia' />
 				)}
 			</div>
 			<div>
@@ -47,7 +48,7 @@ function BlogArticles({
 				<p>
 					<strong> Data publikacji:</strong> {date}
 				</p>
-				<p>{description}</p>
+				<p>{description.slice(0, 300) + "..."}</p>
 			</div>
 		</article>
 	)

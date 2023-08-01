@@ -57,14 +57,14 @@ export const reducer = (state, action) => {
 		case "errorPassword":
 			return { ...state, errorPassword: action.errorPassword }
 		case "passwordToggle":
-			return { ...state, passwordToggle: true }
+			return { ...state, passwordToggle: action.passwordToggle }
 
 		case "repeatPassword":
 			return { ...state, repeatPassword: action.repeatPassword }
 		case "errorRepeatPassword":
 			return { ...state, errorRepeatPassword: action.errorRepeatPassword }
 		case "repeatPasswordToggle":
-			return { ...state, repeatPasswordToggle: true }
+			return { ...state, repeatPasswordToggle: action.repeatPasswordToggle }
 
 		case "error":
 			return { ...state, error: action.error }

@@ -1,18 +1,17 @@
-import { useContext, useEffect, useReducer } from "react"
-import { useNavigate } from "react-router-dom"
+import { useContext, useEffect, useReducer, useState } from "react"
 import { initialState, reducer } from "../../reducer/reducerForm"
 import { reg, specialChars } from "../../UI/validation"
 import LoginContext from "../../context/loginContext"
+import Preloader from "../../UI/Preloader"
 import axios from "axios"
-import "../../styles/userPanel.css"
+import { firebaseConfig } from "../../firebase"
 
-const FIREBASE_API_KEY = process.env.REACT_APP_FIREBASE_API_KEY
-const HTTPS_URL = `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${FIREBASE_API_KEY}`
+const HTTPS_URL = `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${firebaseConfig.apiKey}`
 
 function Settings() {
 	const [state, dispatch] = useReducer(reducer, initialState)
 	const loginContext = useContext(LoginContext)
-	const navigate = useNavigate()
+	const [toggleChangingData, setToggleChangingData] = useState(false)
 
 	const {
 		email,
@@ -42,7 +41,7 @@ function Settings() {
 		} else if (loginContext.dateUser.email === email) {
 			dispatch({
 				type: "errorEmail",
-				errorEmail: "Email musi być inny niż poprzedni!",
+				errorEmail: "Email musi być inny niż aktualny!",
 			})
 		} else if (loginContext.dateUser.localId === "e5w3K8ycToest1wCZVMePNOjMfv1") {
 			dispatch({
@@ -83,7 +82,7 @@ function Settings() {
 			})
 		} else {
 			dispatch({ type: "errorPassword", errorPassword: "" })
-			dispatch({ type: "passwordToggle" })
+			dispatch({ type: "passwordToggle", passwordToggle: true })
 		}
 
 		if (repeatPassword !== password) {
@@ -93,77 +92,90 @@ function Settings() {
 			})
 		} else {
 			dispatch({ type: "errorRepeatPassword", errorRepeatPassword: "" })
-			dispatch({ type: "repeatPasswordToggle" })
+			dispatch({ type: "repeatPasswordToggle", repeatPasswordToggle: true })
 		}
 	}
 
 	useEffect(() => {
-		const fetchData = async () => {
-			if (emailToggle) {
-				try {
-					const res = await axios.post(HTTPS_URL, {
-						idToken: loginContext.dateUser.idToken,
-						email,
-						returnSecureToken: true,
-					})
-					dispatch({ type: "email", email: "" })
-					dispatch({ type: "emailToggle", emailToggle: false })
-					dispatch({
-						type: "changeEmailSuccess",
-						changeEmailSuccess: "Email został zmieniony poprawnie!",
-					})
-					dispatch({ type: "changeEmailToggle", changeEmailToggle: false })
-					loginContext.login({
-						email: res.data.email,
-						idToken: res.data.idToken,
-						userId: res.data.localId,
-					})
-				} catch (ex) {
-					if (ex.response.data.error.message === "EMAIL_EXISTS") {
-						dispatch({ type: "errorEmail", errorEmail: "Email już istnieje!" })
-						dispatch({ type: "emailToggle", emailToggle: false })
-					} else {
-						dispatch({
-							type: "errorEmail",
-							errorEmail: String(ex.response.data.error.message).replaceAll("_", " "),
-						})
-						dispatch({ type: "emailToggle", emailToggle: false })
-					}
-				}
-			}
-			if (repeatPasswordToggle && passwordToggle) {
-				try {
-					const res = await axios.post(HTTPS_URL, {
-						idToken: loginContext.dateUser.idToken,
-						password,
-						returnSecureToken: true,
-					})
-					dispatch({ type: "password", password: "" })
-					dispatch({ type: "repeatPassword", repeatPassword: "" })
-					dispatch({
-						type: "changePasswordSuccess",
-						changePasswordSuccess: "Hasło zostało zmienione poprawnie!",
-					})
-					dispatch({ type: "changePasswordToggle", changePasswordToggle: false })
-					loginContext.login({
-						email: res.data.email,
-						idToken: res.data.idToken,
-						userId: res.data.localId,
-					})
-					navigate("/panel-uzytkownika/settings")
-				} catch (ex) {
-					if (ex.response.data.error.message) {
-						dispatch({
-							type: "errorPassword",
-							errorPassword: String(ex.response.data.error.message).replaceAll("_", " "),
-						})
-						dispatch({ type: "passwordToggle", passwordToggle: false })
-					}
-				}
+		if (emailToggle) {
+			changeEmail()
+		}
+		if (repeatPasswordToggle && passwordToggle) {
+			changePassword()
+		}
+	}, [emailToggle, passwordToggle, repeatPasswordToggle])
+
+	const changeEmail = async () => {
+		try {
+			setToggleChangingData(true)
+			const res = await axios.post(HTTPS_URL, {
+				idToken: loginContext.dateUser.idToken,
+				email,
+				returnSecureToken: true,
+			})
+			loginContext.login({
+				email: res.data.email,
+				idToken: res.data.idToken,
+				userId: res.data.localId,
+			})
+			dispatch({ type: "email", email: "" })
+			dispatch({
+				type: "changeEmailSuccess",
+				changeEmailSuccess: "Email został zmieniony poprawnie!",
+			})
+			dispatch({ type: "emailToggle", emailToggle: false })
+			dispatch({ type: "changeEmailToggle", changeEmailToggle: false })
+			setToggleChangingData(false)
+		} catch (ex) {
+			setToggleChangingData(false)
+			if (ex.response.data.error.message === "EMAIL_EXISTS") {
+				dispatch({ type: "errorEmail", errorEmail: "Email już istnieje!" })
+				dispatch({ type: "emailToggle", emailToggle: false })
+			} else {
+				dispatch({
+					type: "errorEmail",
+					errorEmail: String(ex.response.data.error.message).replaceAll("_", " "),
+				})
+				dispatch({ type: "emailToggle", emailToggle: false })
 			}
 		}
-		fetchData()
-	}, [emailToggle, passwordToggle, repeatPasswordToggle])
+	}
+
+	const changePassword = async () => {
+		try {
+			setToggleChangingData(true)
+			const res = await axios.post(HTTPS_URL, {
+				idToken: loginContext.dateUser.idToken,
+				password,
+				returnSecureToken: true,
+			})
+
+			loginContext.login({
+				email: res.data.email,
+				idToken: res.data.idToken,
+				userId: res.data.localId,
+			})
+			dispatch({ type: "password", password: "" })
+			dispatch({ type: "repeatPassword", repeatPassword: "" })
+			dispatch({
+				type: "changePasswordSuccess",
+				changePasswordSuccess: "Hasło zostało zmienione poprawnie!",
+			})
+			dispatch({ type: "passwordToggle", passwordToggle: false })
+			dispatch({ type: "repeatPasswordToggle", repeatPasswordToggle: false })
+			dispatch({ type: "changePasswordToggle", changePasswordToggle: false })
+			setToggleChangingData(false)
+		} catch (ex) {
+			setToggleChangingData(false)
+			if (ex.response.data.error.message) {
+				dispatch({
+					type: "errorPassword",
+					errorPassword: String(ex.response.data.error.message).replaceAll("_", " "),
+				})
+				dispatch({ type: "passwordToggle", passwordToggle: false })
+			}
+		}
+	}
 
 	const clickChange = e => {
 		e.preventDefault()
@@ -171,6 +183,10 @@ function Settings() {
 			dispatch({ type: "changeEmailToggle", changeEmailToggle: !changeEmailToggle })
 			dispatch({ type: "email", email: "" })
 			dispatch({ type: "errorEmail", errorEmail: "" })
+			dispatch({
+				type: "changeEmailSuccess",
+				changeEmailSuccess: "",
+			})
 		} else {
 			dispatch({
 				type: "changePasswordToggle",
@@ -180,93 +196,107 @@ function Settings() {
 			dispatch({ type: "repeatPassword", repeatPassword: "" })
 			dispatch({ type: "errorPassword", errorPassword: "" })
 			dispatch({ type: "errorRepeatPassword", errorRepeatPassword: "" })
+			dispatch({
+				type: "changePasswordSuccess",
+				changePasswordSuccess: "",
+			})
 		}
 	}
 
-	return (
-		<form className='box-settings' action=''>
-			<span>
-				Twój aktualny email: <strong>{loginContext.dateUser.email}</strong>{" "}
-			</span>
-			<br />
-			<span className='success-settings'>{changeEmailSuccess}</span>
-			<div className='box-settings'>
-				{changeEmailToggle ? (
-					<>
-						<label className='label-settings' htmlFor='email'></label>
-						<input
-							id='email'
-							className='form-input'
-							type='email'
-							value={email}
-							placeholder='Wpisz nowy email'
-							onChange={e => dispatch({ type: "email", email: e.target.value })}
-						/>
-						<input
-							className='btn-form btn-settings'
-							onClick={handleValidateEmail}
-							type='submit'
-							value='Zmień'
-						/>
-						<button className='btn-form btn-settings' id='email' onClick={clickChange}>
-							Anuluj
-						</button>
-						{!errorEmail || <p className='form-error error-settings'>{errorEmail}</p>}
-					</>
+	if (!loginContext.dateUser) {
+		return <Preloader />
+	} else {
+		return (
+			<>
+				{toggleChangingData ? (
+					<Preloader />
 				) : (
-					<button className='btn-form btn-settings' id='email' onClick={clickChange}>
-						Zmień email
-					</button>
+					<form className='box-settings' action=''>
+						<span>
+							Twój aktualny email: <strong>{loginContext.dateUser.email}</strong>
+						</span>
+						<br />
+						<span className='success-settings'>{changeEmailSuccess}</span>
+						<div className='box-settings'>
+							{changeEmailToggle ? (
+								<>
+									<label className='label-settings' htmlFor='email'></label>
+									<input
+										id='email'
+										className='form-input'
+										type='email'
+										value={email}
+										placeholder='Wpisz nowy email'
+										onChange={e => dispatch({ type: "email", email: e.target.value })}
+									/>
+									<input
+										className='btn-form btn-settings'
+										onClick={handleValidateEmail}
+										type='submit'
+										value='Zmień'
+									/>
+									<button className='btn-form btn-settings' id='email' onClick={clickChange}>
+										Anuluj
+									</button>
+									{!errorEmail || <p className='form-error error-settings'>{errorEmail}</p>}
+								</>
+							) : (
+								<button className='btn-form btn-settings' id='email' onClick={clickChange}>
+									Zmień email
+								</button>
+							)}
+						</div>
+						<span className='success-settings'>{changePasswordSuccess}</span>
+						<div className='box-settings'>
+							{changePasswordToggle ? (
+								<>
+									<label className='label-settings' htmlFor='password'>
+										Hasło{" "}
+									</label>
+									<input
+										id='password'
+										className='form-input'
+										type='password'
+										value={password}
+										onChange={e => dispatch({ type: "password", password: e.target.value })}
+									/>
+									{!errorPassword || <p className='form-error error-settings'>{errorPassword}</p>}
+									<label className='label-settings' htmlFor='repeatPassword'>
+										Powtórz Hasło
+									</label>
+									<input
+										className='form-input'
+										type='password'
+										id='repeatPassword'
+										value={repeatPassword}
+										onChange={e =>
+											dispatch({ type: "repeatPassword", repeatPassword: e.target.value })
+										}
+									/>
+									<input
+										className='btn-form btn-settings'
+										onClick={handleValidatePassword}
+										type='submit'
+										value='Zmień'
+									/>
+									<button className='btn-form btn-settings' id='password' onClick={clickChange}>
+										Anuluj
+									</button>
+									{!errorRepeatPassword || (
+										<p className='form-error error-settings'>{errorRepeatPassword}</p>
+									)}
+								</>
+							) : (
+								<button className='btn-form btn-settings' id='password' onClick={clickChange}>
+									Zmień hasło
+								</button>
+							)}
+						</div>
+					</form>
 				)}
-			</div>
-			<span className='success-settings'>{changePasswordSuccess}</span>
-			<div className='box-settings'>
-				{changePasswordToggle ? (
-					<>
-						<label className='label-settings' htmlFor='password'>
-							Hasło{" "}
-						</label>
-						<input
-							id='password'
-							className='form-input'
-							type='password'
-							value={password}
-							onChange={e => dispatch({ type: "password", password: e.target.value })}
-						/>
-						{!errorPassword || <p className='form-error error-settings'>{errorPassword}</p>}
-						<label className='label-settings' htmlFor='repeatPassword'>
-							Powtórz Hasło{" "}
-						</label>
-						<input
-							className='form-input'
-							type='password'
-							id='repeatPassword'
-							value={repeatPassword}
-							onChange={e =>
-								dispatch({ type: "repeatPassword", repeatPassword: e.target.value })
-							}
-						/>
-						<input
-							className='btn-form btn-settings'
-							onClick={handleValidatePassword}
-							type='submit'
-							value='Zmień'
-						/>
-						<button className='btn-form btn-settings' id='password' onClick={clickChange}>
-							Anuluj
-						</button>
-						{!errorRepeatPassword || (
-							<p className='form-error error-settings'>{errorRepeatPassword}</p>
-						)}
-					</>
-				) : (
-					<button className='btn-form btn-settings' id='password' onClick={clickChange}>
-						Zmień hasło
-					</button>
-				)}
-			</div>
-		</form>
-	)
+			</>
+		)
+	}
 }
 
 export default Settings

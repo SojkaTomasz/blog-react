@@ -17,9 +17,7 @@ function Page() {
 			<Route path='/blog/:id' element={<Article />} />
 			<Route path='/kontakt' element={<Contact />} />
 			<Route path='/login' element={<Login />} />
-			{!LoginContext._currentValue.isLogged || (
-				<Route path='/panel-uzytkownika/*' element={<UserPanel />} />
-			)}
+			<Route path='/panel-uzytkownika/*' element={<UserPanel />} />
 			<Route path='/rejestracja' element={<Registration />} />
 			<Route path='*' element={<ErrorPage />} />
 		</Routes>

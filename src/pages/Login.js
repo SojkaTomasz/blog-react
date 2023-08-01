@@ -1,12 +1,12 @@
+import { useContext, useReducer, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import { useContext, useReducer } from "react"
 import { initialState, reducer } from "../reducer/reducerForm"
+import { firebaseConfig } from "../firebase"
 import LoginContext from "../context/loginContext"
 import axios from "axios"
 import "../styles/form.css"
 
-const FIREBASE_API_KEY = process.env.REACT_APP_FIREBASE_API_KEY
-const HTTPS_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${FIREBASE_API_KEY}`
+const HTTPS_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${firebaseConfig.apiKey}`
 
 function Login() {
 	const [state, dispatch] = useReducer(reducer, initialState)
@@ -47,6 +47,12 @@ function Login() {
 		}
 		fetchData()
 	}
+
+	useEffect(() => {
+		if (loginContext.isLogged) {
+			navigate("/panel-uzytkownika")
+		}
+	}, [loginContext])
 
 	return (
 		<div>

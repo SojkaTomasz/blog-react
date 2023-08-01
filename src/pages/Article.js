@@ -3,12 +3,11 @@ import { useContext, useEffect, useState } from "react"
 import LoginContext from "../context/loginContext"
 import Preloader from "../UI/Preloader"
 import noPhoto from "../images/no-image-available.jpg"
-import articleData from "../data/articleData"
-// import axios from "axios"
+import { firebaseConfig } from "../firebase"
+import axios from "axios"
 import "../styles/article.css"
 
-const API_KEY = process.env.REACT_APP_API_KEY
-const HTTPS_URL = `https://newsapi.org/v2/everything?q=bitcoin&from=2023-06-26&sortBy=publishedAt&apiKey=${API_KEY}`
+const HTTPS_URL = `${firebaseConfig.databaseURL}/articles.json`
 
 function Article() {
 	const [dateArticle, setDateArticle] = useState(null)
@@ -16,26 +15,29 @@ function Article() {
 	const { id } = useParams()
 
 	useEffect(() => {
-		// axios
-		// 	.get(HTTPS_URL)
-		// 	.then(res => {
-		// 		const article = res.data.articles.find(article => article.title === id)
-		// 		setDateArticle(article)
-		// 	})
-		// 	.catch(error => {
-		// 		console.error("Error fetching data:", error)
-		// 	})
-		const article = articleData.find(article => article.title === id)
-		setDateArticle(article)
-	}, [id])
+		likArticle()
+	}, [])
+
+	const likArticle = async () => {
+		try {
+			const res = await axios.get(`${HTTPS_URL}`)
+			const allArticles = []
+			for (const key in res.data) {
+				allArticles.push({ ...res.data[key], id: key })
+			}
+			const article = allArticles.find(article => article.title === id)
+			setDateArticle(article)
+		} catch (ex) {
+			console.log(ex.response)
+		}
+	}
 
 	if (!dateArticle) {
 		return <Preloader />
 	}
 
-	const { title, author, description, source, urlToImage, url, publishedAt } =
-		dateArticle
-	const date = new Date(publishedAt).toLocaleString()
+	const { title, author, description, image, datePublication } = dateArticle
+	const date = new Date(datePublication).toLocaleString()
 
 	if (!loginContext.isLogged) {
 		return (
@@ -52,8 +54,8 @@ function Article() {
 				<h1 className='title-section title-section-article'>Artykuł</h1>
 				<Link className='link-article' to='/blog'>{`<< Powrót do bloga`}</Link>
 				<div className='box-img'>
-					{urlToImage ? (
-						<img className='img-article' src={urlToImage} alt={title} />
+					{image ? (
+						<img className='img-article' src={image} alt={title} />
 					) : (
 						<img className='img-article' src={noPhoto} alt='brak zdjęcia' />
 					)}
@@ -65,15 +67,7 @@ function Article() {
 				<p>
 					<strong> Data publikacji:</strong> {date}
 				</p>
-				<p>
-					<strong> Żródło:</strong> {source.name}
-				</p>
 				<p>{description}</p>
-				<a
-					className='link-article'
-					style={{ textAlign: "end" }}
-					href={url}
-				>{`Zobacz cały artykuł >> `}</a>
 			</article>
 		)
 	}

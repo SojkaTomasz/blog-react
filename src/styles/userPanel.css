@@ -1,17 +1,19 @@
-.box-pagination-user-panel {
+.box-nav-user-panel {
+	display: flex;
+	flex-wrap: wrap;
 	margin-bottom: 20px;
 	background-color: #f0f0f0;
-	padding: 5px 0;
+	list-style: none;
 }
 
-.items-link-user-panel {
-	display: inline;
+.item-nav-user-panel {
+	display: flex;
 }
 
 .link-user-panel {
 	text-decoration: none;
 	color: #222;
-	padding: 5px 10px;
+	padding: 8px 12px;
 	background-color: #f0f0f0;
 	cursor: pointer;
 }
@@ -45,6 +47,25 @@
 
 .error-settings {
 	text-align: left;
+}
+
+.box-form-add-article {
+	display: flex;
+	flex-direction: column;
+}
+
+.checkbox-add-article {
+	display: flex;
+	align-items: center;
+}
+
+.checkbox-add-article > label {
+	margin-right: 10px;
+}
+
+.checkbox-add-article > input {
+	height: 15px;
+	width: 15px;
 }
 
 .success-settings {
