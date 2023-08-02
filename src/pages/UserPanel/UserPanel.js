@@ -7,9 +7,9 @@ import AllArticles from "./AllArticles"
 import "../../styles/userPanel.css"
 
 const navigationItems = [
-	{ name: "Edytuj profil", to: "ustawienia" },
 	{ name: "Wszystkie artykuły", to: "wszystkie-artykuły" },
 	{ name: "Dodaj artykuł", to: "dodaj-artykul" },
+	{ name: "Edytuj profil", to: "ustawienia" },
 ]
 
 function UserPanel() {
@@ -23,7 +23,7 @@ function UserPanel() {
 	}
 
 	useEffect(() => {
-		navigate("/panel-uzytkownika/ustawienia")
+		navigate("/panel-uzytkownika/wszystkie-artykuły")
 		if (!loginContext.isLogged) {
 			navigate("/login")
 		}

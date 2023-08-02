@@ -28,15 +28,15 @@ const Blog = () => {
 
 	const fetchArticles = async () => {
 		try {
-			const res = await axios.get(`${HTTPS_URL}`)
-			const newArticles = []
+			const res = await axios.get(HTTPS_URL)
+			let allArticles = []
 			for (const key in res.data) {
-				newArticles.push({ ...res.data[key], id: key })
+				allArticles.push({ ...res.data[key], id: key })
 			}
-			const sortedData = newArticles.sort((a, b) =>
+			 allArticles.sort((a, b) =>
 				b.datePublication.localeCompare(a.datePublication)
 			)
-			dispatch({ type: "setState", state: sortedData })
+			dispatch({ type: "setState", state: allArticles })
 			dispatch({ type: "setGetData" })
 		} catch (ex) {
 			console.log(ex)

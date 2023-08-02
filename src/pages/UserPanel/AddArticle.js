@@ -32,6 +32,9 @@ function AddArticle() {
 
 	const handleAddArticle = async e => {
 		e.preventDefault()
+		setErrorImage("")
+		setErrorTitle("")
+		setErrorDescription("")
 		try {
 			const res = await axios.get(`${HTTPS_URL}`)
 			let allArticles = []
@@ -64,6 +67,8 @@ function AddArticle() {
 
 		if (!dateArticle.description) {
 			setErrorDescription("Dodaj Treść artykułu!")
+		} else if (loginContext.dateUser.localId !== "EFjEUuVXdUPRS0I4b5rqNvlsHPK2") {
+			setErrorDescription("TO KONTO NIE MA MOŻLIWOŚCI DODAWANIA TREŚCI!")
 		} else {
 			setErrorDescription("")
 			setToggleDescription(true)

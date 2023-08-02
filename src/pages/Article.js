@@ -67,7 +67,7 @@ function Article() {
 				<p>
 					<strong> Data publikacji:</strong> {date}
 				</p>
-				<p>{description}</p>
+				<div style={{ whiteSpace: "pre-wrap" }}>{description}</div>
 			</article>
 		)
 	}

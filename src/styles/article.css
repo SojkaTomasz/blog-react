@@ -29,6 +29,7 @@
 }
 
 .box-article > p,
+.box-article > pre,
 .title-article {
 	margin: 10px 0;
 }

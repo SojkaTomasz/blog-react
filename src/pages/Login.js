@@ -13,11 +13,11 @@ function Login() {
 	const loginContext = useContext(LoginContext)
 	const navigate = useNavigate()
 
-	const { email, password, error } = state
+	const { email, password, errorLogin } = state
 
 	const handleLogin = e => {
 		e.preventDefault()
-		dispatch({ type: "error", error: "" })
+		dispatch({ type: "errorLogin", errorLogin: "" })
 		const fetchData = async () => {
 			try {
 				const res = await axios.post(HTTPS_URL, {
@@ -39,9 +39,12 @@ function Login() {
 					ex.response.data.error.message ===
 					"TOO_MANY_ATTEMPTS_TRY_LATER : Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later."
 				) {
-					dispatch({ type: "error", error: "Zbyt wiele prób, spróbuj ponownie później!" })
+					dispatch({
+						type: "errorLogin",
+						errorLogin: "Zbyt wiele prób, spróbuj ponownie później!",
+					})
 				} else {
-					dispatch({ type: "error", error: "Niepoprawny email lub hasło!" })
+					dispatch({ type: "errorLogin", errorLogin: "Niepoprawny email lub hasło!" })
 				}
 			}
 		}
@@ -74,7 +77,7 @@ function Login() {
 					value={password}
 					onChange={e => dispatch({ type: "password", password: e.target.value })}
 				/>
-				{!error || <p className='form-error'>{error}</p>}
+				{!errorLogin || <p className='form-error'>{errorLogin}</p>}
 				<input
 					className='btn-form btn-form-login'
 					onClick={handleLogin}

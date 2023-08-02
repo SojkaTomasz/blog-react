@@ -1,10 +1,15 @@
 .box-blog-articles {
-	margin: 20px 0;
+	margin: 25px 0;
+	background-color: #f7f7f7;
 }
 
 .img-blog-articles {
 	display: block;
 	width: 200px;
+}
+
+.box-description-articles{
+	padding: 10px;
 }
 
 .highlighted-blog-articles {

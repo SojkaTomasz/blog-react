@@ -45,14 +45,14 @@ function Contact() {
 			})
 		} else {
 			dispatch({ type: "errorTel", errorTel: "" })
-			dispatch({ type: "telToggle" })
+			dispatch({ type: "telToggle", telToggle: true })
 		}
 
 		if (message.length < 5) {
 			dispatch({ type: "errorMessage", errorMessage: "Musisz podać min 5 znaków!" })
 		} else {
 			dispatch({ type: "errorMessage", errorMessage: "" })
-			dispatch({ type: "messageToggle" })
+			dispatch({ type: "messageToggle", messageToggle: true })
 		}
 	}
 
@@ -66,7 +66,9 @@ function Contact() {
 		return (
 			<div>
 				<h1 className='title-section'>Kontakt</h1>
-				<p className='form-success'>Wiadomość wysłana poprawnie! Niebawem się odezwiemy.</p>
+				<p className='form-success'>
+					Wiadomość wysłana poprawnie! Niebawem się odezwiemy.
+				</p>
 			</div>
 		)
 	} else {

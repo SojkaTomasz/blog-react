@@ -12,7 +12,7 @@ function BlogArticles({
 	valueSearch,
 }) {
 	const date = new Date(datePublication).toLocaleString()
-
+console.log(valueSearch);
 	const highlightedTitle = () => {
 		if (valueSearch && title.toLowerCase().includes(valueSearch.toLowerCase())) {
 			const regex = new RegExp(valueSearch, "gi")
@@ -33,7 +33,7 @@ function BlogArticles({
 					<img className='img-blog-articles' src={noPhoto} alt='brak zdjęcia' />
 				)}
 			</div>
-			<div>
+			<div className='box-description-articles'>
 				<h2 className='title-blog-articles'>
 					<Link
 						className='title-blog-articles'
@@ -48,7 +48,7 @@ function BlogArticles({
 				<p>
 					<strong> Data publikacji:</strong> {date}
 				</p>
-				<p>{description.slice(0, 300) + "..."}</p>
+				{description.slice(0, 190) + "..."}
 			</div>
 		</article>
 	)

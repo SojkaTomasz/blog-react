@@ -62,7 +62,7 @@ function Registration() {
 			})
 		} else {
 			dispatch({ type: "errorPassword", errorPassword: "" })
-			dispatch({ type: "passwordToggle" })
+			dispatch({ type: "passwordToggle", passwordToggle: true })
 		}
 
 		if (repeatPassword !== password) {
@@ -72,7 +72,7 @@ function Registration() {
 			})
 		} else {
 			dispatch({ type: "errorRepeatPassword", errorRepeatPassword: "" })
-			dispatch({ type: "repeatPasswordToggle" })
+			dispatch({ type: "repeatPasswordToggle", repeatPasswordToggle: true })
 		}
 	}
 

@@ -19,8 +19,7 @@ export const initialState = {
 	errorRepeatPassword: "",
 	repeatPasswordToggle: false,
 
-	error: "",
-	errorToggle: false,
+	errorLogin: "",
 
 	success: false,
 	changeEmailToggle: false,
@@ -43,14 +42,14 @@ export const reducer = (state, action) => {
 		case "errorTel":
 			return { ...state, errorTel: action.errorTel }
 		case "telToggle":
-			return { ...state, telToggle: true }
+			return { ...state, telToggle: action.telToggle }
 
 		case "message":
 			return { ...state, message: action.message }
 		case "errorMessage":
 			return { ...state, errorMessage: action.errorMessage }
 		case "messageToggle":
-			return { ...state, messageToggle: true }
+			return { ...state, messageToggle: action.messageToggle }
 
 		case "password":
 			return { ...state, password: action.password }
@@ -66,10 +65,8 @@ export const reducer = (state, action) => {
 		case "repeatPasswordToggle":
 			return { ...state, repeatPasswordToggle: action.repeatPasswordToggle }
 
-		case "error":
-			return { ...state, error: action.error }
-		case "repeatToggle":
-			return { ...state, repeatToggle: true }
+		case "errorLogin":
+			return { ...state, errorLogin: action.errorLogin }
 
 		case "success":
 			return { ...state, success: action.success }

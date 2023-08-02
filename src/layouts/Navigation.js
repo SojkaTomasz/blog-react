@@ -15,11 +15,7 @@ function Navigation() {
 
 	const menu = navigationItems.map(link => (
 		<li className='li-nav' key={link.name}>
-			<NavLink
-				className='link-nav'
-				to={link.to}
-				onClick={() => setActiveNav(false)}
-			>
+			<NavLink className='link-nav' to={link.to} onClick={() => setActiveNav(false)}>
 				{link.name}
 			</NavLink>
 		</li>
@@ -36,12 +32,12 @@ function Navigation() {
 				<div>
 					{activeNav ? (
 						<i
-							className='fa-solid fa-xmark activeIcon '
+							className='fa-solid icon-nav fa-xmark activeIcon '
 							onClick={() => setActiveNav(!activeNav)}
 						></i>
 					) : (
 						<i
-							className='fa-solid fa-bars activeIcon'
+							className='fa-solid icon-nav fa-bars activeIcon'
 							onClick={() => setActiveNav(!activeNav)}
 						></i>
 					)}
