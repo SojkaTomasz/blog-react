@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom"
 import noPhoto from "../../images/no-image-available.jpg"
+import { slugify } from "transliteration"
 import "./styles/blogArticles.css"
 
 function BlogArticles({
@@ -12,7 +13,6 @@ function BlogArticles({
 	valueSearch,
 }) {
 	const date = new Date(datePublication).toLocaleString()
-console.log(valueSearch);
 	const highlightedTitle = () => {
 		if (valueSearch && title.toLowerCase().includes(valueSearch.toLowerCase())) {
 			const regex = new RegExp(valueSearch, "gi")
@@ -37,7 +37,9 @@ console.log(valueSearch);
 				<h2 className='title-blog-articles'>
 					<Link
 						className='title-blog-articles'
-						to={`/blog/${encodeURIComponent(title.replace("%", "%25"))}`}
+						to={`/blog/${encodeURIComponent(
+							slugify(title.replaceAll(" ", "-")+id.toLowerCase())
+						)}`}
 						author={author}
 						dangerouslySetInnerHTML={{ __html: highlightedTitle() }}
 					/>

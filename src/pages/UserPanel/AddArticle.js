@@ -1,6 +1,7 @@
-import { useState, useContext, useEffect } from "react"
+import { useState, useContext, useEffect, useReducer } from "react"
 import { useNavigate } from "react-router-dom"
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
+import { initialState, reducer } from "../../reducer/reducerArticle"
 import { storage, firebaseConfig } from "../../firebase"
 import LoginContext from "../../context/loginContext"
 import Preloader from "../../UI/Preloader"
@@ -10,74 +11,67 @@ import { v4 } from "uuid"
 const HTTPS_URL = `${firebaseConfig.databaseURL}/articles.json`
 
 function AddArticle() {
-	const [dateArticle, setDateArticle] = useState({
-		author: "",
-		title: "",
-		description: "",
-		image: null,
-		datePublication: String(new Date()),
-	})
-
-	const [errorTitle, setErrorTitle] = useState("")
-	const [errorImage, setErrorImage] = useState("")
-	const [errorDescription, setErrorDescription] = useState("")
-	const [toggleTitle, setToggleTitle] = useState(false)
-	const [toggleImage, setToggleImage] = useState(false)
-	const [toggleDescription, setToggleDescription] = useState(false)
-	const [toggleCheckbox, setToggleCheckbox] = useState(false)
-	const [addingArticle, setToggleAddingArticle] = useState(false)
+	const [state, dispatch] = useReducer(reducer, initialState)
+	const {
+		dataAddArticle,
+		errorTitle,
+		errorImage,
+		errorDescription,
+		toggleTitle,
+		toggleImage,
+		toggleDescription,
+		toggleCheckbox,
+	} = state
 
 	const loginContext = useContext(LoginContext)
 	const navigate = useNavigate()
 
 	const handleAddArticle = async e => {
 		e.preventDefault()
-		setErrorImage("")
-		setErrorTitle("")
-		setErrorDescription("")
-		try {
-			const res = await axios.get(`${HTTPS_URL}`)
-			let allArticles = []
-			for (const key in res.data) {
-				allArticles.push({ ...res.data[key], id: key })
-			}
-			const findArticles = allArticles.filter(x => x.title === dateArticle.title)
-			if (!dateArticle.title) {
-				setErrorTitle("Musisz podać tytuł!")
-			} else if (findArticles.length > 0) {
-				setErrorTitle("Masz już artykuł o tym samym tytule!")
-			} else {
-				setErrorTitle("")
-				setToggleTitle(true)
-			}
-		} catch (error) {
-			console.error("Błąd:", error)
-		}
-		if (!toggleCheckbox) {
-			if (!dateArticle.image) {
-				setErrorImage("Dodaj zdjęcie artykułu!")
-			} else {
-				setErrorImage("")
-				setToggleImage(true)
-			}
+		dispatch({ type: "errorTitle", errorTitle: "" })
+		dispatch({ type: "errorImage", errorImage: "" })
+		dispatch({ type: "errorDescription", errorDescription: "" })
+		dispatch({ type: "toggleTitle", toggleTitle: false })
+		dispatch({ type: "toggleImage", toggleImage: false })
+		dispatch({ type: "toggleDescription", toggleDescription: false })
+
+		if (!dataAddArticle.title) {
+			dispatch({ type: "errorTitle", errorTitle: "Musisz podać tytuł!" })
 		} else {
-			setErrorImage("")
-			setToggleImage(true)
+			dispatch({ type: "errorTitle", errorTitle: "" })
+			dispatch({ type: "toggleTitle", toggleTitle: true })
 		}
 
-		if (!dateArticle.description) {
-			setErrorDescription("Dodaj Treść artykułu!")
-		} else if (loginContext.dateUser.localId !== "EFjEUuVXdUPRS0I4b5rqNvlsHPK2") {
-			setErrorDescription("TO KONTO NIE MA MOŻLIWOŚCI DODAWANIA TREŚCI!")
+		if (!toggleCheckbox) {
+			if (!dataAddArticle.image) {
+				dispatch({ type: "errorImage", errorImage: "Dodaj zdjęcie artykułu!" })
+			} else {
+				dispatch({ type: "errorImage", errorImage: "" })
+				dispatch({ type: "toggleImage", toggleImage: true })
+			}
 		} else {
-			setErrorDescription("")
-			setToggleDescription(true)
+			dispatch({ type: "errorImage", errorImage: "" })
+			dispatch({ type: "toggleImage", toggleImage: true })
+		}
+
+		if (!dataAddArticle.description) {
+			dispatch({
+				type: "errorDescription",
+				errorDescription: "Dodaj Treść artykułu!",
+			})
+		} else if (loginContext.dateUser.localId !== "EFjEUuVXdUPRS0I4b5rqNvlsHPK2") {
+			dispatch({
+				type: "errorDescription",
+				errorDescription: "TO KONTO NIE MA MOŻLIWOŚCI DODAWANIA TREŚCI!",
+			})
+		} else {
+			dispatch({ type: "errorDescription", errorDescription: "" })
+			dispatch({ type: "toggleDescription", toggleDescription: true })
 		}
 	}
 
 	useEffect(() => {
 		if (toggleImage && toggleTitle && toggleDescription) {
-			setToggleAddingArticle(true)
 			addArticle()
 		}
 	}, [toggleImage, toggleTitle, toggleDescription])
@@ -86,16 +80,16 @@ function AddArticle() {
 		try {
 			let imageUrl = null
 			if (!toggleCheckbox) {
-				const imageRef = ref(storage, `images/${dateArticle.image.name + v4()}`)
-				await uploadBytes(imageRef, dateArticle.image)
+				const imageRef = ref(storage, `images/${dataAddArticle.image.name + v4()}`)
+				await uploadBytes(imageRef, dataAddArticle.image)
 				imageUrl = await getDownloadURL(imageRef)
 			}
 			const articleData = {
 				author: loginContext.dateUser.email || "Anonimowy",
-				title: dateArticle.title,
-				description: dateArticle.description,
+				title: dataAddArticle.title,
+				description: dataAddArticle.description,
 				image: imageUrl,
-				datePublication: dateArticle.datePublication,
+				datePublication: dataAddArticle.datePublication,
 			}
 			await axios.post(HTTPS_URL, articleData)
 			navigate("/panel-uzytkownika/wszystkie-artykuły")
@@ -109,7 +103,7 @@ function AddArticle() {
 	} else {
 		return (
 			<>
-				{addingArticle ? (
+				{toggleImage && toggleTitle && toggleDescription ? (
 					<Preloader />
 				) : (
 					<div>
@@ -119,8 +113,13 @@ function AddArticle() {
 								className='form-input form-input-email'
 								id='title'
 								type='text'
-								value={dateArticle.title}
-								onChange={e => setDateArticle({ ...dateArticle, title: e.target.value })}
+								value={dataAddArticle.title}
+								onChange={e =>
+									dispatch({
+										type: "dataAddArticle",
+										dataAddArticle: { ...dataAddArticle, title: e.target.value },
+									})
+								}
 							/>
 							{!errorTitle || <p className='form-error  error-settings'>{errorTitle}</p>}
 							{toggleCheckbox || (
@@ -130,7 +129,12 @@ function AddArticle() {
 										className='form-input form-input-img'
 										type='file'
 										name='file'
-										onChange={e => setDateArticle({ ...dateArticle, image: e.target.files[0] })}
+										onChange={e =>
+											dispatch({
+												type: "dataAddArticle",
+												dataAddArticle: { ...dataAddArticle, image: e.target.files[0] },
+											})
+										}
 									/>
 									{!errorImage || <p className='form-error  error-settings'>{errorImage}</p>}
 								</>
@@ -140,16 +144,26 @@ function AddArticle() {
 								<input
 									type='checkbox'
 									checked={toggleCheckbox}
-									onChange={e => setToggleCheckbox(e.target.checked)}
+									onChange={e =>
+										dispatch({
+											type: "toggleCheckbox",
+											toggleCheckbox: e.target.checked,
+										})
+									}
 								/>
 							</div>
 							<label htmlFor='description'>Treść</label>
 							<textarea
 								className='form-textarea'
 								id='description'
-								value={dateArticle.description}
+								value={dataAddArticle.description}
 								type='textarea'
-								onChange={e => setDateArticle({ ...dateArticle, description: e.target.value })}
+								onChange={e =>
+									dispatch({
+										type: "dataAddArticle",
+										dataAddArticle: { ...dataAddArticle, description: e.target.value },
+									})
+								}
 								rows='10'
 							></textarea>
 							{!errorDescription || (

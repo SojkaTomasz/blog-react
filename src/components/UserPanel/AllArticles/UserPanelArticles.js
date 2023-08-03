@@ -1,10 +1,12 @@
 import noPhoto from "../../../images/no-image-available.jpg"
-import DelateArticle from "../../../context/delateArticle"
+import DelateArticleContext from "../../../context/delateArticleContext"
+import EditArticleContext from "../../../context/editArticleContext"
 import { useContext } from "react"
 import "./userPanelArticles.css"
 
 function UserPanelArticles({ id, image, title, datePublication, valueSearch }) {
-	const acceptDelateArticle = useContext(DelateArticle)
+	const delateArticleContext = useContext(DelateArticleContext)
+	const editArticleContext = useContext(EditArticleContext)
 
 	const highlightedTitle = () => {
 		if (valueSearch && title.toLowerCase().includes(valueSearch.toLowerCase())) {
@@ -29,9 +31,12 @@ function UserPanelArticles({ id, image, title, datePublication, valueSearch }) {
 				</div>
 			</div>
 			<div className='box-btn-all-articles'>
-				<i className='fa-regular icon-all-articles fa-pen-to-square'></i>
 				<i
-					onClick={() => acceptDelateArticle.showPopUpFunction(id)}
+					onClick={() => editArticleContext.showPopUpEditFunction(id)}
+					className='fa-regular icon-all-articles fa-pen-to-square'
+				></i>
+				<i
+					onClick={() => delateArticleContext.showPopUpFunction(id)}
 					className='fa-regular icon-all-articles fa-trash-can'
 				></i>
 			</div>

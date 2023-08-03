@@ -1,9 +1,11 @@
 import { useReducer, useState, useEffect } from "react"
 import { initialState, reducer } from "../../reducer/reducerBlog"
 import { firebaseConfig } from "../../firebase"
-import DelateArticle from "../../context/delateArticle"
+import DelateArticleContext from "../../context/delateArticleContext"
+import EditArticleContext from "../../context/editArticleContext"
 import UserPanelArticles from "../../components/UserPanel/AllArticles/UserPanelArticles"
 import PopUpDeleteArticle from "../../components/UserPanel/AllArticles/PopUpDeleteArticle"
+import PopUpEditArticle from "../../components/UserPanel/AllArticles/PopUpEditArticle"
 import Pagination from "../../components/Blog/Pagination"
 import Filter from "../../components/Blog/Filter"
 import Preloader from "../../UI/Preloader"
@@ -13,9 +15,13 @@ const HTTPS_URL = `${firebaseConfig.databaseURL}/articles.json`
 
 function AllArticles() {
 	const [state, dispatch] = useReducer(reducer, initialState)
-	const [showPopUp, setShowPopUp] = useState(false)
+	const [showPopUpDelete, setShowPopUpDelete] = useState(false)
 	const [acceptDelate, setAcceptDelate] = useState(false)
 	const [idArticleDelate, setIdArticleDelate] = useState("")
+	const [showPopUpEdit, setShowPopUpEdit] = useState(false)
+	const [acceptEdit, setAcceptEdit] = useState(false)
+	const [articleDataEdit, setArticleDataEdit] = useState({})
+	const [idArticleEdit, setIdArticleEdit] = useState("")
 	const toPage = state.currentPage * state.blogsPerPage
 	const fromPage = toPage - state.blogsPerPage
 
@@ -91,38 +97,47 @@ function AllArticles() {
 	))
 
 	return (
-		<DelateArticle.Provider
+		<DelateArticleContext.Provider
 			value={{
-				showPopUp: showPopUp,
+				showPopUpDelete: showPopUpDelete,
 				acceptDelate: acceptDelate,
 				idArticleDelate: idArticleDelate,
 				showPopUpFunction: id => {
 					setIdArticleDelate(id)
-					setShowPopUp(!showPopUp)
-				},
-				acceptFunction: () => {
-					setAcceptDelate(!acceptDelate)
-					setShowPopUp(false)
+					setShowPopUpDelete(!showPopUpDelete)
 				},
 			}}
 		>
-			{state.getData ? (
-				<div>
-					<Filter
-						dispatch={dispatch}
-						blogsPerPage={state.blogsPerPage}
-						valueSearch={state.valueSearch}
-						sort={state.sort}
-					/>
-					{pagination}
-					{allArticle.slice(fromPage, toPage)}
-					{pagination}
-					<PopUpDeleteArticle />
-				</div>
-			) : (
-				<Preloader />
-			)}
-		</DelateArticle.Provider>
+			<EditArticleContext.Provider
+				value={{
+					showPopUpEdit: showPopUpEdit,
+					articleDataEdit: articleDataEdit,
+					idArticleEdit: idArticleEdit,
+					showPopUpEditFunction: id => {
+						setIdArticleEdit(id)
+						setShowPopUpEdit(!showPopUpEdit)
+					},
+				}}
+			>
+				{state.getData ? (
+					<div>
+						<Filter
+							dispatch={dispatch}
+							blogsPerPage={state.blogsPerPage}
+							valueSearch={state.valueSearch}
+							sort={state.sort}
+						/>
+						{pagination}
+						<div>{allArticle.slice(fromPage, toPage)}</div>
+						{pagination}
+						{showPopUpDelete && <PopUpDeleteArticle />}
+						{showPopUpEdit && <PopUpEditArticle />}
+					</div>
+				) : (
+					<Preloader />
+				)}
+			</EditArticleContext.Provider>
+		</DelateArticleContext.Provider>
 	)
 }
 

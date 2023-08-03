@@ -1,55 +1,53 @@
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useState } from "react"
 import { firebaseConfig } from "../../../firebase"
-import DelateArticle from "../../../context/delateArticle"
+import DelateArticleContext from "../../../context/delateArticleContext"
+import LoginContext from "../../../context/loginContext"
 import axios from "axios"
 import "./popUpDeleteArticle.css"
 
 const HTTPS_URL = `${firebaseConfig.databaseURL}/articles`
 
 function PopUpDeleteArticle() {
-	const acceptDelateArticle = useContext(DelateArticle)
+	const [errorInfo, setErrorInfo] = useState("")
+	const delateArticleContext = useContext(DelateArticleContext)
+	const loginContext = useContext(LoginContext)
 
 	const deleteArticle = async id => {
-		try {
-			await axios.delete(`${HTTPS_URL}/${id}.json`)
-			acceptDelateArticle.acceptFunction()
-			window.location.reload()
-		} catch (ex) {
-			console.log(ex)
+		console.log(id)
+		if (loginContext.dateUser.localId !== "EFjEUuVXdUPRS0I4b5rqNvlsHPK2") {
+			return setErrorInfo("TO KONTO NIE MA MOŻLIWOŚCI KASOWANIA!")
+		} else {
+			try {
+				await axios.delete(`${HTTPS_URL}/${id}.json`)
+				delateArticleContext.showPopUpFunction()
+				window.location.reload()
+			} catch (ex) {
+				console.log(ex)
+			}
 		}
 	}
 
-	useEffect(() => {
-		if (acceptDelateArticle.acceptDelate) {
-			deleteArticle(acceptDelateArticle.idArticleDelate)
-		} else {
-		}
-	}, [acceptDelateArticle.showPopUp])
-
 	return (
-		<>
-			{acceptDelateArticle.showPopUp && (
-				<div className='box-popup'>
-					<div>
-						<h2>Czy na pewno?</h2>
-						<div>
-							<button
-								className='btn-form btn-popup'
-								onClick={acceptDelateArticle.acceptFunction}
-							>
-								Tak
-							</button>
-							<button
-								className='btn-form'
-								onClick={() => acceptDelateArticle.showPopUpFunction(null)}
-							>
-								Nie
-							</button>
-						</div>
-					</div>
+		<div className='box-popup-delete'>
+			<div>
+				<h2>Czy na pewno?</h2>
+				{!errorInfo || <p className='form-error  error-settings'>{errorInfo}</p>}
+				<div>
+					<button
+						className='btn-form btn-popup'
+						onClick={() => deleteArticle(delateArticleContext.idArticleDelate)}
+					>
+						Tak
+					</button>
+					<button
+						className='btn-form btn-popup'
+						onClick={() => delateArticleContext.showPopUpFunction(null)}
+					>
+						Nie
+					</button>
 				</div>
-			)}
-		</>
+			</div>
+		</div>
 	)
 }
 

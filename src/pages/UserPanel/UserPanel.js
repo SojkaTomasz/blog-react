@@ -31,7 +31,9 @@ function UserPanel() {
 
 	return (
 		<div>
-			<h1 className='title-section'>Panel Użytkownika</h1>
+			<h1 id='pagination' className='title-section'>
+				Panel Użytkownika
+			</h1>
 			<ul className='box-nav-user-panel'>
 				{navigationItems.map((item, id) => (
 					<li key={id} className='item-nav-user-panel'>

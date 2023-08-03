@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react"
 import LoginContext from "../context/loginContext"
 import Preloader from "../UI/Preloader"
 import noPhoto from "../images/no-image-available.jpg"
+import { slugify } from "transliteration"
 import { firebaseConfig } from "../firebase"
 import axios from "axios"
 import "../styles/article.css"
@@ -25,7 +26,11 @@ function Article() {
 			for (const key in res.data) {
 				allArticles.push({ ...res.data[key], id: key })
 			}
-			const article = allArticles.find(article => article.title === id)
+			console.log(allArticles)
+			const article = allArticles.find(
+				article =>
+					slugify(article.title.replaceAll(" ", "-") + article.id.toLowerCase()) === id
+			)
 			setDateArticle(article)
 		} catch (ex) {
 			console.log(ex.response)
