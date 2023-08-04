@@ -13,7 +13,9 @@ Furthermore, I've prepared a special preview account, granting insight into admi
 If you'd like to explore my project, I warmly invite you to log in using the provided credentials:
 
 Username: test@test.com
+
 Password: Test123!@#
+
 Thank you for taking the time to familiarize yourself with my skills and project.
 
 Best regards,
