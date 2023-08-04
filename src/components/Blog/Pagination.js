@@ -16,7 +16,7 @@ function Pagination(props) {
 		} else {
 			setIsActiveForward(false)
 		}
-	})
+	}, [props.fromPage, props.lengthPage, props.toPage])
 
 	return (
 		<div className='box-pagination'>
@@ -35,7 +35,7 @@ function Pagination(props) {
 				onClick={() => props.click(1, "+")}
 				className={`btn-pagination ${!isActiveForward || "btn-pagination-disabled"}`}
 			>
-				Wstecz
+				Dalej
 			</a>
 		</div>
 	)

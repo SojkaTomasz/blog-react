@@ -28,6 +28,28 @@
 	background-color: rgb(131, 175, 42);
 }
 
+.custom-file-input::-webkit-file-upload-button {
+	display: none;
+}
+.custom-file-input::before {
+	content: "Prześlij";
+	display: inline-block;
+	margin-right: 10px;
+	border: 1px solid #999;
+	cursor: pointer;
+	text-transform: uppercase;
+	padding: 8px 5px;
+	border: none;
+	color: white;
+	background-color: yellowgreen;
+	cursor: pointer;
+	transition: background-color 0.4s;
+}
+.custom-file-input:hover::before {
+	background-color: rgb(139, 188, 42);
+}
+
+
 .form-error {
 	margin-top: -3px;
 	margin-bottom: 5px;

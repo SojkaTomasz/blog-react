@@ -7,7 +7,13 @@ export const initialState = {
 		datePublication: new Date().toJSON(),
 	},
 
-	dataEditArticle: {},
+	dataEditArticle: {
+		author: "",
+		title: "",
+		description: "",
+		image: null,
+		datePublication: "",
+	},
 
 	imageEditArticle: "",
 

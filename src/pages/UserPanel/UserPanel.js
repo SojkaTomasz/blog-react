@@ -6,12 +6,6 @@ import AddArticle from "./AddArticle"
 import AllArticles from "./AllArticles"
 import "../../styles/userPanel.css"
 
-const navigationItems = [
-	{ name: "Wszystkie artykuły", to: "wszystkie-artykuły" },
-	{ name: "Dodaj artykuł", to: "dodaj-artykul" },
-	{ name: "Edytuj profil", to: "ustawienia" },
-]
-
 function UserPanel() {
 	const loginContext = useContext(LoginContext)
 	const navigate = useNavigate()
@@ -22,8 +16,29 @@ function UserPanel() {
 		navigate("/login")
 	}
 
+	const navigationItems = [
+		...(loginContext.dataUser &&
+		(loginContext.dataUser.localId === "EFjEUuVXdUPRS0I4b5rqNvlsHPK2" ||
+			loginContext.dataUser.localId === "e5w3K8ycToest1wCZVMePNOjMfv1")
+			? [
+					{ name: "Wszystkie artykuły", to: "wszystkie-artykuły" },
+					{ name: "Dodaj artykuł", to: "dodaj-artykul" },
+			  ]
+			: []),
+		{ name: "Edytuj profil", to: "ustawienia" },
+	]
+
 	useEffect(() => {
-		navigate("/panel-uzytkownika/wszystkie-artykuły")
+		if (
+			loginContext.dataUser &&
+			(loginContext.dataUser.localId === "EFjEUuVXdUPRS0I4b5rqNvlsHPK2" ||
+				loginContext.dataUser.localId === "e5w3K8ycToest1wCZVMePNOjMfv1")
+		) {
+			navigate("/panel-uzytkownika/wszystkie-artykuły")
+		} else {
+			navigate("/panel-uzytkownika/ustawienia")
+		}
+
 		if (!loginContext.isLogged) {
 			navigate("/login")
 		}
@@ -55,8 +70,14 @@ function UserPanel() {
 			</ul>
 			<Routes>
 				<Route path='ustawienia' element={<Settings />} />
-				<Route path='wszystkie-artykuły' element={<AllArticles />} />
-				<Route path='dodaj-artykul' element={<AddArticle />} />
+				{loginContext.dataUser &&
+					(loginContext.dataUser.localId === "EFjEUuVXdUPRS0I4b5rqNvlsHPK2" ||
+						loginContext.dataUser.localId === "e5w3K8ycToest1wCZVMePNOjMfv1") && (
+						<>
+							<Route path='wszystkie-artykuły' element={<AllArticles />} />
+							<Route path='dodaj-artykul' element={<AddArticle />} />
+						</>
+					)}
 			</Routes>
 		</div>
 	)

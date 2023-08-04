@@ -1,9 +1,10 @@
-import { useContext, useEffect, useReducer } from "react"
+import { useContext, useEffect, useReducer, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import LoginContext from "../context/loginContext"
 import { initialState, reducer } from "../reducer/reducerForm"
 import { reg, specialChars } from "../UI/validation"
 import axios from "axios"
+import Preloader from "../UI/Preloader"
 import "../styles/form.css"
 import { firebaseConfig } from "../firebase"
 
@@ -12,6 +13,7 @@ const HTTPS_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key
 function Registration() {
 	const [state, dispatch] = useReducer(reducer, initialState)
 	const loginContext = useContext(LoginContext)
+	const [send, setSend] = useState(false)
 	const navigate = useNavigate()
 
 	const {
@@ -86,12 +88,14 @@ function Registration() {
 	useEffect(() => {
 		const fetchData = async () => {
 			if (emailToggle && passwordToggle && repeatPasswordToggle) {
+				setSend(true)
 				try {
 					const res = await axios.post(HTTPS_URL, {
 						email,
 						password,
 						returnSecureToken: true,
 					})
+					setSend(false)
 					dispatch({ type: "email", email: "" })
 					dispatch({ type: "password", password: "" })
 					dispatch({ type: "repeatPassword", repeatPassword: "" })
@@ -106,6 +110,7 @@ function Registration() {
 						navigate("/panel-uzytkownika")
 					}, 3000)
 				} catch (ex) {
+					setSend(false)
 					if (ex.response.data.error.message === "EMAIL_EXISTS") {
 						dispatch({ type: "errorEmail", errorEmail: "Email już istnieje!" })
 						dispatch({ type: "emailToggle", emailToggle: false })
@@ -134,46 +139,47 @@ function Registration() {
 		)
 	} else {
 		return (
-			<div>
-				<h1 className='title-section'>Rejestracja</h1>
-				<form className='box-form-registration' action=''>
-					<label htmlFor='email'>Email </label>
-					<input
-						id='email'
-						className='form-input'
-						type='email'
-						value={email}
-						onChange={e => dispatch({ type: "email", email: e.target.value })}
-					/>
-					{!errorEmail || <p className='form-error'>{errorEmail}</p>}
-					<label htmlFor='password'>Hasło </label>
-					<input
-						id='password'
-						className='form-input'
-						type='password'
-						value={password}
-						onChange={e => dispatch({ type: "password", password: e.target.value })}
-					/>
-					{!errorPassword || <p className='form-error'>{errorPassword}</p>}
-					<label htmlFor='repeatPassword'>Powtórz Hasło </label>
-					<input
-						className='form-input'
-						type='password'
-						id='repeatPassword'
-						value={repeatPassword}
-						onChange={e =>
-							dispatch({ type: "repeatPassword", repeatPassword: e.target.value })
-						}
-					/>
-					{!errorRepeatPassword || <p className='form-error'>{errorRepeatPassword}</p>}
-					<input
-						className='btn-form btn-form-registration'
-						onClick={handleValidateRegister}
-						type='submit'
-						value='Rejestruj'
-					/>
-				</form>
-			</div>
+			<>
+				<div>
+					<h1 className='title-section'>Rejestracja</h1>
+					{send ? (
+						<Preloader />
+					) : (
+						<form className='box-form-registration' onSubmit={handleValidateRegister}>
+							<label htmlFor='email'>Email</label>
+							<input
+								id='email'
+								className='form-input'
+								type='email'
+								value={email}
+								onChange={e => dispatch({ type: "email", email: e.target.value })}
+							/>
+							{!errorEmail || <p className='form-error'>{errorEmail}</p>}
+							<label htmlFor='password'>Hasło</label>
+							<input
+								id='password'
+								className='form-input'
+								type='password'
+								value={password}
+								onChange={e => dispatch({ type: "password", password: e.target.value })}
+							/>
+							{!errorPassword || <p className='form-error'>{errorPassword}</p>}
+							<label htmlFor='repeatPassword'>Powtórz Hasło</label>
+							<input
+								className='form-input'
+								type='password'
+								id='repeatPassword'
+								value={repeatPassword}
+								onChange={e =>
+									dispatch({ type: "repeatPassword", repeatPassword: e.target.value })
+								}
+							/>
+							{!errorRepeatPassword || <p className='form-error'>{errorRepeatPassword}</p>}
+							<button className='btn-form btn-form-registration'>Rejestruj</button>
+						</form>
+					)}
+				</div>
+			</>
 		)
 	}
 }

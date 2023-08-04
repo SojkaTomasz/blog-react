@@ -126,7 +126,7 @@ function AddArticle() {
 								<>
 									<label htmlFor='img'>Dodaj zdjęcie</label>
 									<input
-										className='form-input form-input-img'
+										className='form-input form-input-img custom-file-input'
 										type='file'
 										name='file'
 										onChange={e =>
@@ -140,8 +140,9 @@ function AddArticle() {
 								</>
 							)}
 							<div className='form-input checkbox-add-article'>
-								<label htmlFor=''>Nie dodaję zdjecia</label>
+								<label htmlFor='checkbox'>Nie dodaję zdjecia</label>
 								<input
+									id='checkbox'
 									type='checkbox'
 									checked={toggleCheckbox}
 									onChange={e =>
@@ -169,9 +170,7 @@ function AddArticle() {
 							{!errorDescription || (
 								<p className='form-error error-settings'>{errorDescription}</p>
 							)}
-							<button className='btn-form btn-form-login' type='submit'>
-								Dodaj
-							</button>
+							<button className='btn-form btn-form-login'>Dodaj</button>
 						</form>
 					</div>
 				)}

@@ -59,8 +59,8 @@ function Login() {
 	return (
 		<div>
 			<h1 className='title-section'>Logowanie</h1>
-			<form className='box-form-login' action=''>
-				<label htmlFor='email'>Email </label>
+			<form className='box-form-login' onSubmit={handleLogin}>
+				<label htmlFor='email'>Email</label>
 				<input
 					id='email'
 					className='form-input'
@@ -68,22 +68,21 @@ function Login() {
 					value={email}
 					onChange={e => dispatch({ type: "email", email: e.target.value })}
 				/>
-				<label htmlFor='password'>Hasło </label>
+				<label htmlFor='password'>Hasło</label>
 				<input
 					id='password'
 					className='form-input'
-					type='text'
+					type='password'
 					value={password}
 					onChange={e => dispatch({ type: "password", password: e.target.value })}
 				/>
 				{!errorLogin || <p className='form-error'>{errorLogin}</p>}
-				<input
-					className='btn-form btn-form-login'
-					onClick={handleLogin}
-					type='submit'
-					value='Zaloguj'
-				/>
-				<Link className="password-recovery"  to='/reset-hasla'>Nie pamiętam hasła...</Link>
+				<button className='btn-form btn-form-login'>
+					Zaloguj
+				</button>
+				<Link className='password-recovery' to='/reset-hasla'>
+					Nie pamiętam hasła...
+				</Link>
 			</form>
 		</div>
 	)

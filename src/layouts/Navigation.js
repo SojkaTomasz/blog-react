@@ -1,5 +1,5 @@
 import { NavLink, Link } from "react-router-dom"
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import LoginContext from "../context/loginContext"
 import "../styles/navigation.css"
 
@@ -12,6 +12,15 @@ const navigationItems = [
 function Navigation() {
 	const [activeNav, setActiveNav] = useState(false)
 	const isLogged = useContext(LoginContext)
+
+	useEffect(() => {
+		const handleResize = () => {
+			if (window.innerWidth > 768) {
+				setActiveNav(false)
+			}
+		}
+		window.addEventListener("resize", handleResize)
+	}, [])
 
 	const menu = navigationItems.map(link => (
 		<li className='li-nav' key={link.name}>
@@ -26,7 +35,7 @@ function Navigation() {
 			<div className='header-nav'>
 				<h2>
 					<Link onClick={() => setActiveNav(false)} className='logo-nav' to='/'>
-						Loo<span>Go</span>
+						Blog<span>Goo</span>
 					</Link>
 				</h2>
 				<div>

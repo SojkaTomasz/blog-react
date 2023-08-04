@@ -1,11 +1,11 @@
-import { useContext, useEffect, useReducer, useState } from "react"
+import { useContext, useEffect, useReducer } from "react"
 import { initialState, reducer } from "../../../reducer/reducerArticle"
-import { storage, firebaseConfig } from "../../../firebase"
 import EditArticleContext from "../../../context/editArticleContext"
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
-import { v4 } from "uuid"
-import axios from "axios"
 import LoginContext from "../../../context/loginContext"
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
+import { storage, firebaseConfig } from "../../../firebase"
+import axios from "axios"
+import { v4 } from "uuid"
 import "./styles/popUpEditArticle.css"
 
 const HTTPS_URL = `${firebaseConfig.databaseURL}/articles.json`
@@ -154,7 +154,8 @@ function PopUpEditArticle() {
 								<>
 									<label htmlFor='img'>Dodaj nowe zdjęcie</label>
 									<input
-										className='form-input form-input-img'
+										className='form-input form-input-img custom-file-input'
+										id="img"
 										type='file'
 										name='file'
 										onChange={e =>
@@ -215,17 +216,10 @@ function PopUpEditArticle() {
 								<p className='form-error error-tings'>{errorDescription}</p>
 							)}
 							<div className='box-btn-edit-popup'>
-								<button
-									className='btn-form btn-edit-popup'
-									onClick={handleEditArticle}
-									type='submit'
-								>
-									Edytuj
-								</button>
+								<button className='btn-form btn-edit-popup'>Edytuj</button>
 								<button
 									className='btn-form btn-edit-popup'
 									onClick={() => editArticleContext.showPopUpEditFunction(null)}
-									type='submit'
 								>
 									Anuluj
 								</button>

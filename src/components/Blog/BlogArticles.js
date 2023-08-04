@@ -38,7 +38,7 @@ function BlogArticles({
 					<Link
 						className='title-blog-articles'
 						to={`/blog/${encodeURIComponent(
-							slugify(title.replaceAll(" ", "-")+id.toLowerCase())
+							slugify(title.replaceAll(" ", "-") + id.toLowerCase())
 						)}`}
 						author={author}
 						dangerouslySetInnerHTML={{ __html: highlightedTitle() }}

@@ -1,7 +1,7 @@
 import { useContext, useState } from "react"
-import { firebaseConfig } from "../../../firebase"
 import DelateArticleContext from "../../../context/delateArticleContext"
 import LoginContext from "../../../context/loginContext"
+import { firebaseConfig } from "../../../firebase"
 import axios from "axios"
 import "./styles/popUpDeleteArticle.css"
 

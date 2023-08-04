@@ -19,7 +19,6 @@ function AllArticles() {
 	const [acceptDelate, setAcceptDelate] = useState(false)
 	const [idArticleDelate, setIdArticleDelate] = useState("")
 	const [showPopUpEdit, setShowPopUpEdit] = useState(false)
-	const [acceptEdit, setAcceptEdit] = useState(false)
 	const [articleDataEdit, setArticleDataEdit] = useState({})
 	const [idArticleEdit, setIdArticleEdit] = useState("")
 	const toPage = state.currentPage * state.blogsPerPage
