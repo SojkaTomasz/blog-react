@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import DelateArticleContext from "../../../context/delateArticleContext"
-import EditArticleContext from "../../../context/editArticleContext"
 import noPhoto from "../../../images/no-image-available.jpg"
+import EditArticleContext from "../../../context/editArticleContext"
 import "./styles/userPanelArticles.css"
 
 function UserPanelArticles({ id, image, title, datePublication, valueSearch }) {
