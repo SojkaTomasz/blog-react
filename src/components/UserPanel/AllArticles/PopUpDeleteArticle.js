@@ -1,9 +1,9 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useState } from "react"
 import { firebaseConfig } from "../../../firebase"
 import DelateArticleContext from "../../../context/delateArticleContext"
 import LoginContext from "../../../context/loginContext"
 import axios from "axios"
-import "./popUpDeleteArticle.css"
+import "./styles/popUpDeleteArticle.css"
 
 const HTTPS_URL = `${firebaseConfig.databaseURL}/articles`
 
@@ -13,8 +13,7 @@ function PopUpDeleteArticle() {
 	const loginContext = useContext(LoginContext)
 
 	const deleteArticle = async id => {
-		console.log(id)
-		if (loginContext.dateUser.localId !== "EFjEUuVXdUPRS0I4b5rqNvlsHPK2") {
+		if (loginContext.dataUser.localId !== "EFjEUuVXdUPRS0I4b5rqNvlsHPK2") {
 			return setErrorInfo("TO KONTO NIE MA MOŻLIWOŚCI KASOWANIA!")
 		} else {
 			try {

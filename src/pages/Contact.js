@@ -27,6 +27,12 @@ function Contact() {
 
 	const send = e => {
 		e.preventDefault()
+		dispatch({ type: "errorEmail", errorEmail: "" })
+		dispatch({ type: "emailToggle", emailToggle: false })
+		dispatch({ type: "errorTel", errorTel: "" })
+		dispatch({ type: "telToggle", telToggle: false })
+		dispatch({ type: "errorMessage", errorMessage: "" })
+		dispatch({ type: "messageToggle", messageToggle: false })
 		if (!email) {
 			dispatch({ type: "errorEmail", errorEmail: "Musisz podać emaila!" })
 		} else if (!reg.test(email)) {

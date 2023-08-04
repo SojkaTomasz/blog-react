@@ -9,7 +9,7 @@ import "../styles/App.css"
 
 function App() {
 	const [isLogged, setIsLogged] = useState(false)
-	const [dateUser, setDateUser] = useState(null)
+	const [dataUser, setDateUser] = useState(null)
 
 	useEffect(() => {
 		const checkUser = () => {
@@ -28,7 +28,7 @@ function App() {
 		<LoginContext.Provider
 			value={{
 				isLogged: isLogged,
-				dateUser: dateUser,
+				dataUser: dataUser,
 				login: tokenData => {
 					setIsLogged(true)
 					setDateUser(tokenData)

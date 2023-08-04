@@ -30,8 +30,15 @@ function Registration() {
 		success,
 	} = state
 
-	const handleRegister = e => {
+	const handleValidateRegister = e => {
 		e.preventDefault()
+		dispatch({ type: "errorEmail", errorEmail: "" })
+		dispatch({ type: "emailToggle", emailToggle: false })
+		dispatch({ type: "errorPassword", errorPassword: "" })
+		dispatch({ type: "passwordToggle", passwordToggle: false })
+		dispatch({ type: "errorRepeatPassword", errorRepeatPassword: "" })
+		dispatch({ type: "repeatPasswordToggle", repeatPasswordToggle: false })
+
 		if (!email) {
 			dispatch({ type: "errorEmail", errorEmail: "Musisz podać emaila!" })
 		} else if (!reg.test(email)) {
@@ -97,7 +104,7 @@ function Registration() {
 							localId: res.data.localId,
 						})
 						navigate("/panel-uzytkownika")
-					}, 5000)
+					}, 3000)
 				} catch (ex) {
 					if (ex.response.data.error.message === "EMAIL_EXISTS") {
 						dispatch({ type: "errorEmail", errorEmail: "Email już istnieje!" })
@@ -161,7 +168,7 @@ function Registration() {
 					{!errorRepeatPassword || <p className='form-error'>{errorRepeatPassword}</p>}
 					<input
 						className='btn-form btn-form-registration'
-						onClick={handleRegister}
+						onClick={handleValidateRegister}
 						type='submit'
 						value='Rejestruj'
 					/>

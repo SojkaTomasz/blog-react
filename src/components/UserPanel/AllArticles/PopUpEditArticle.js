@@ -6,7 +6,7 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
 import { v4 } from "uuid"
 import axios from "axios"
 import LoginContext from "../../../context/loginContext"
-import "./popUpEditArticle.css"
+import "./styles/popUpEditArticle.css"
 
 const HTTPS_URL = `${firebaseConfig.databaseURL}/articles.json`
 
@@ -54,10 +54,10 @@ function PopUpEditArticle() {
 	const handleEditArticle = async e => {
 		e.preventDefault()
 		dispatch({ type: "errorTitle", errorTitle: "" })
-		dispatch({ type: "errorImage", errorImage: "" })
-		dispatch({ type: "errorDescription", errorDescription: "" })
 		dispatch({ type: "toggleTitle", toggleTitle: false })
+		dispatch({ type: "errorImage", errorImage: "" })
 		dispatch({ type: "toggleImage", toggleImage: false })
+		dispatch({ type: "errorDescription", errorDescription: "" })
 		dispatch({ type: "toggleDescription", toggleDescription: false })
 
 		if (!dataEditArticle.title) {
@@ -87,7 +87,7 @@ function PopUpEditArticle() {
 				type: "errorDescription",
 				errorDescription: "Dodaj Treść artykułu!",
 			})
-		} else if (loginContext.dateUser.localId !== "EFjEUuVXdUPRS0I4b5rqNvlsHPK2") {
+		} else if (loginContext.dataUser.localId !== "EFjEUuVXdUPRS0I4b5rqNvlsHPK2") {
 			dispatch({
 				type: "errorDescription",
 				errorDescription: "TO KONTO NIE MA MOŻLIWOŚCI DODAWANIA TREŚCI!",

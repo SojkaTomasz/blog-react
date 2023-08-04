@@ -11,7 +11,7 @@ import "../styles/article.css"
 const HTTPS_URL = `${firebaseConfig.databaseURL}/articles.json`
 
 function Article() {
-	const [dateArticle, setDateArticle] = useState(null)
+	const [dataArticle, setDateArticle] = useState(null)
 	const loginContext = useContext(LoginContext)
 	const { id } = useParams()
 
@@ -37,11 +37,11 @@ function Article() {
 		}
 	}
 
-	if (!dateArticle) {
+	if (!dataArticle) {
 		return <Preloader />
 	}
 
-	const { title, author, description, image, datePublication } = dateArticle
+	const { title, author, description, image, datePublication } = dataArticle
 	const date = new Date(datePublication).toLocaleString()
 
 	if (!loginContext.isLogged) {

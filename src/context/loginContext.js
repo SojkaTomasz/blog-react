@@ -2,7 +2,7 @@ import React from "react"
 
 const LoginContext = React.createContext({
 	isLogged: false,
-	dateUser: {},
+	dataUser: {},
 	login: () => {},
 	logout: () => {},
 })

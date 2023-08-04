@@ -1,5 +1,5 @@
 import { useContext, useReducer, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 import { initialState, reducer } from "../reducer/reducerForm"
 import { firebaseConfig } from "../firebase"
 import LoginContext from "../context/loginContext"
@@ -34,7 +34,6 @@ function Login() {
 				navigate("/panel-uzytkownika")
 			} catch (ex) {
 				console.log(ex.response.data.error.message)
-
 				if (
 					ex.response.data.error.message ===
 					"TOO_MANY_ATTEMPTS_TRY_LATER : Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later."
@@ -84,6 +83,7 @@ function Login() {
 					type='submit'
 					value='Zaloguj'
 				/>
+				<Link className="password-recovery"  to='/reset-hasla'>Nie pamiętam hasła...</Link>
 			</form>
 		</div>
 	)

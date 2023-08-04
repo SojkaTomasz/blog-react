@@ -2,7 +2,7 @@ import noPhoto from "../../../images/no-image-available.jpg"
 import DelateArticleContext from "../../../context/delateArticleContext"
 import EditArticleContext from "../../../context/editArticleContext"
 import { useContext } from "react"
-import "./userPanelArticles.css"
+import "./styles/userPanelArticles.css"
 
 function UserPanelArticles({ id, image, title, datePublication, valueSearch }) {
 	const delateArticleContext = useContext(DelateArticleContext)

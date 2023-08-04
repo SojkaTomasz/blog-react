@@ -37,6 +37,15 @@
 	animation: animation-error 0.4s;
 }
 
+.password-recovery{
+		text-decoration: none;
+	color: #222;
+}
+
+.password-recovery:hover {
+	color: yellowgreen;
+}
+
 @keyframes animation-error {
 	0% {
 		opacity: 0;
