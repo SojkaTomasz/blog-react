@@ -114,7 +114,7 @@ function PopUpEditArticle() {
 			}
 			const changedArticleData = {
 				[dataEditArticle.id]: {
-					author: dataEditArticle.author,
+					author: loginContext.dataUser.email,
 					datePublication: new Date(dataEditArticle.datePublication).toJSON(),
 					description: dataEditArticle.description,
 					image: imageUrl,
@@ -155,7 +155,7 @@ function PopUpEditArticle() {
 									<label htmlFor='img'>Dodaj nowe zdjęcie</label>
 									<input
 										className='form-input form-input-img custom-file-input'
-										id="img"
+										id='img'
 										type='file'
 										name='file'
 										onChange={e =>

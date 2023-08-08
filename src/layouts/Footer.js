@@ -6,9 +6,8 @@ function Footer() {
 	return (
 		<div>
 			<h2>
-				&copy; {currentYear}{" "}
-				<Link className='logo-nav' to='/'>
-					Blog<span>Goo</span>
+				&copy; {currentYear}
+				<Link style={{fontSize: 24}} className='logo-nav' to='/'>Blog<span>Goo</span>
 				</Link>
 			</h2>
 		</div>
