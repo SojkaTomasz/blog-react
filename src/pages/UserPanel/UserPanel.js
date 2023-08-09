@@ -18,8 +18,8 @@ function UserPanel() {
 
 	const navigationItems = [
 		...(loginContext.dataUser &&
-		(loginContext.dataUser.localId === "EFjEUuVXdUPRS0I4b5rqNvlsHPK2" ||
-			loginContext.dataUser.localId === "e5w3K8ycToest1wCZVMePNOjMfv1")
+		(loginContext.dataUser.localId === "gc0RCgDg1LXZopMxvRw0x1RV8Gg2" ||
+			loginContext.dataUser.localId === "nPX6h1SzE4TYXh7kktlB489Apzv2")
 			? [
 					{ name: "Wszystkie artykuły", to: "wszystkie-artykuły" },
 					{ name: "Dodaj artykuł", to: "dodaj-artykul" },
@@ -31,8 +31,8 @@ function UserPanel() {
 	useEffect(() => {
 		if (
 			loginContext.dataUser &&
-			(loginContext.dataUser.localId === "EFjEUuVXdUPRS0I4b5rqNvlsHPK2" ||
-				loginContext.dataUser.localId === "e5w3K8ycToest1wCZVMePNOjMfv1")
+			(loginContext.dataUser.localId === "gc0RCgDg1LXZopMxvRw0x1RV8Gg2" ||
+				loginContext.dataUser.localId === "nPX6h1SzE4TYXh7kktlB489Apzv2")
 		) {
 			navigate("/panel-uzytkownika/wszystkie-artykuły")
 		} else {
@@ -71,8 +71,8 @@ function UserPanel() {
 			<Routes>
 				<Route path='ustawienia' element={<Settings />} />
 				{loginContext.dataUser &&
-					(loginContext.dataUser.localId === "EFjEUuVXdUPRS0I4b5rqNvlsHPK2" ||
-						loginContext.dataUser.localId === "e5w3K8ycToest1wCZVMePNOjMfv1") && (
+					(loginContext.dataUser.localId === "gc0RCgDg1LXZopMxvRw0x1RV8Gg2" ||
+						loginContext.dataUser.localId === "nPX6h1SzE4TYXh7kktlB489Apzv2") && (
 						<>
 							<Route path='wszystkie-artykuły' element={<AllArticles />} />
 							<Route path='dodaj-artykul' element={<AddArticle />} />

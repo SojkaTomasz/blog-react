@@ -32,7 +32,10 @@ function PasswordReset() {
 				console.log(ex.response.data.error.message)
 				setSend(false)
 				if (ex.response.data.error.message === "EMAIL_NOT_FOUND") {
-					dispatch({ type: "errorEmail", errorEmail: "Hasła nie znalezione w bazie!" })
+					dispatch({
+						type: "errorEmail",
+						errorEmail: "Nie znaleziono tego adresu e-mail w bazie danych!",
+					})
 				} else {
 					dispatch({ type: "errorEmail", errorEmail: "Niepoprawny email!" })
 				}

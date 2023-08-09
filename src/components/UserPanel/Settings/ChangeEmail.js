@@ -33,7 +33,7 @@ function ChangeEmail() {
 				type: "errorEmail",
 				errorEmail: "Email musi być inny niż aktualny!",
 			})
-		} else if (loginContext.dataUser.localId === "e5w3K8ycToest1wCZVMePNOjMfv1") {
+		} else if (loginContext.dataUser.localId === "nPX6h1SzE4TYXh7kktlB489Apzv2") {
 			dispatch({
 				type: "errorEmail",
 				errorEmail: "TO KONTO NIE MA MOŻLIWOŚCI ZMIAN!",
@@ -52,7 +52,6 @@ function ChangeEmail() {
 
 	const changeEmail = async () => {
 		try {
-			console.log("ok")
 			setToggleChangingData(true)
 			const res = await axios.post(HTTPS_URL, {
 				idToken: loginContext.dataUser.idToken,
@@ -62,7 +61,7 @@ function ChangeEmail() {
 			loginContext.login({
 				email: res.data.email,
 				idToken: res.data.idToken,
-				userId: res.data.localId,
+				localId: res.data.localId,
 			})
 			dispatch({ type: "email", email: "" })
 			dispatch({
@@ -107,42 +106,35 @@ function ChangeEmail() {
 				{toggleChangingData ? (
 					<Preloader />
 				) : (
-					<form className='box-settings' action=''>
-						<span>
+					<div>
+						<p>
 							Twój aktualny email: <strong>{loginContext.dataUser.email}</strong>
-						</span>
-						<br />
-						<span className='success-settings'>{changeEmailSuccess}</span>
-						<div className='box-settings'>
-							{changeEmailToggle ? (
-								<>
-									<label className='label-settings' htmlFor='email'></label>
-									<input
-										id='email'
-										className='form-input'
-										type='email'
-										value={email}
-										placeholder='Wpisz nowy email'
-										onChange={e => dispatch({ type: "email", email: e.target.value })}
-									/>
-									<input
-										className='btn-form btn-settings'
-										onClick={handleValidateChangeEmail}
-										type='submit'
-										value='Zmień'
-									/>
-									<button className='btn-form btn-settings' id='email' onClick={clickChange}>
-										Anuluj
-									</button>
-									{!errorEmail || <p className='form-error error-settings'>{errorEmail}</p>}
-								</>
-							) : (
-								<button className='btn-form btn-settings' id='email' onClick={clickChange}>
-									Zmień email
+						</p>
+						{changeEmailSuccess && (
+							<p className='success-settings'>{changeEmailSuccess}</p>
+						)}
+						{changeEmailToggle ? (
+							<form className='box-settings' onSubmit={handleValidateChangeEmail}>
+								<input
+									id='email'
+									className='form-input'
+									type='email'
+									value={email}
+									placeholder='Wpisz nowy email'
+									onChange={e => dispatch({ type: "email", email: e.target.value })}
+								/>
+								<button className='btn-form btn-settings'>Zmień</button>
+								<button className='btn-form btn-settings' onClick={clickChange}>
+									Anuluj
 								</button>
-							)}
-						</div>
-					</form>
+								{errorEmail && <p className='form-error error-settings'>{errorEmail}</p>}
+							</form>
+						) : (
+							<button className='btn-form btn-settings' onClick={clickChange}>
+								Zmień email
+							</button>
+						)}
+					</div>
 				)}
 			</>
 		)

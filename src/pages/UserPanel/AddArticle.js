@@ -59,7 +59,7 @@ function AddArticle() {
 				type: "errorDescription",
 				errorDescription: "Dodaj Treść artykułu!",
 			})
-		} else if (loginContext.dataUser.localId !== "EFjEUuVXdUPRS0I4b5rqNvlsHPK2") {
+		} else if (loginContext.dataUser.localId !== "gc0RCgDg1LXZopMxvRw0x1RV8Gg2") {
 			dispatch({
 				type: "errorDescription",
 				errorDescription: "TO KONTO NIE MA MOŻLIWOŚCI DODAWANIA TREŚCI!",

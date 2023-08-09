@@ -52,7 +52,7 @@ function ChangePassword() {
 				type: "errorPassword",
 				errorPassword: "Hasło musi posiadać chociaż jeden znak specjalny",
 			})
-		} else if (loginContext.dataUser.localId === "e5w3K8ycToest1wCZVMePNOjMfv1") {
+		} else if (loginContext.dataUser.localId === "nPX6h1SzE4TYXh7kktlB489Apzv2") {
 			dispatch({
 				type: "errorPassword",
 				errorPassword: "TO KONTO NIE MA MOŻLIWOŚCI ZMIAN!",
@@ -91,7 +91,7 @@ function ChangePassword() {
 			loginContext.login({
 				email: res.data.email,
 				idToken: res.data.idToken,
-				userId: res.data.localId,
+				localId: res.data.localId,
 			})
 			dispatch({ type: "password", password: "" })
 			dispatch({ type: "repeatPassword", repeatPassword: "" })
@@ -137,54 +137,49 @@ function ChangePassword() {
 			{toggleChangingData ? (
 				<Preloader />
 			) : (
-				<form className='box-settings' action=''>
-					<span className='success-settings'>{changePasswordSuccess}</span>
-					<div className='box-settings'>
-						{changePasswordToggle ? (
-							<>
-								<label className='label-settings' htmlFor='password'>
-									Hasło{" "}
-								</label>
-								<input
-									id='password'
-									className='form-input'
-									type='password'
-									value={password}
-									onChange={e => dispatch({ type: "password", password: e.target.value })}
-								/>
-								{!errorPassword || <p className='form-error error-settings'>{errorPassword}</p>}
-								<label className='label-settings' htmlFor='repeatPassword'>
-									Powtórz Hasło
-								</label>
-								<input
-									className='form-input'
-									type='password'
-									id='repeatPassword'
-									value={repeatPassword}
-									onChange={e =>
-										dispatch({ type: "repeatPassword", repeatPassword: e.target.value })
-									}
-								/>
-								<input
-									className='btn-form btn-settings'
-									onClick={handleValidateChangePassword}
-									type='submit'
-									value='Zmień'
-								/>
-								<button className='btn-form btn-settings' id='password' onClick={clickChange}>
-									Anuluj
-								</button>
-								{!errorRepeatPassword || (
-									<p className='form-error error-settings'>{errorRepeatPassword}</p>
-								)}
-							</>
-						) : (
-							<button className='btn-form btn-settings' id='password' onClick={clickChange}>
-								Zmień hasło
+				<div>
+					{changePasswordSuccess && (
+						<p className='success-settings'>{changePasswordSuccess}</p>
+					)}
+					{changePasswordToggle ? (
+						<form className='box-settings' onSubmit={handleValidateChangePassword}>
+							<label className='label-settings' htmlFor='password'>
+								Hasło
+							</label>
+							<input
+								id='password'
+								className='form-input'
+								type='password'
+								value={password}
+								onChange={e => dispatch({ type: "password", password: e.target.value })}
+							/>
+							{errorPassword && <p className='form-error error-settings'>{errorPassword}</p>}
+							<label className='label-settings' htmlFor='repeatPassword'>
+								Powtórz Hasło
+							</label>
+							<input
+								className='form-input'
+								type='password'
+								id='repeatPassword'
+								value={repeatPassword}
+								onChange={e =>
+									dispatch({ type: "repeatPassword", repeatPassword: e.target.value })
+								}
+							/>
+							<button className='btn-form btn-settings'>Zmień</button>
+							<button className='btn-form btn-settings' onClick={clickChange}>
+								Anuluj
 							</button>
-						)}
-					</div>
-				</form>
+							{errorRepeatPassword && (
+								<p className='form-error error-settings'>{errorRepeatPassword}</p>
+							)}
+						</form>
+					) : (
+						<button className='btn-form btn-settings' onClick={clickChange}>
+							Zmień hasło
+						</button>
+					)}
+				</div>
 			)}
 		</>
 	)

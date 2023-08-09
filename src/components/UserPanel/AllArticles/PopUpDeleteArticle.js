@@ -13,7 +13,7 @@ function PopUpDeleteArticle() {
 	const loginContext = useContext(LoginContext)
 
 	const deleteArticle = async id => {
-		if (loginContext.dataUser.localId !== "EFjEUuVXdUPRS0I4b5rqNvlsHPK2") {
+		if (loginContext.dataUser.localId !== "gc0RCgDg1LXZopMxvRw0x1RV8Gg2") {
 			return setErrorInfo("TO KONTO NIE MA MOŻLIWOŚCI KASOWANIA!")
 		} else {
 			try {
