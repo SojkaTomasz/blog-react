@@ -25,11 +25,11 @@ function Login() {
 					password,
 					returnSecureToken: true,
 				})
-
 				loginContext.login({
 					email: res.data.email,
 					idToken: res.data.idToken,
 					localId: res.data.localId,
+					photoUrl: res.data.profilePicture || null,
 				})
 				navigate("/panel-uzytkownika")
 			} catch (ex) {
@@ -77,9 +77,7 @@ function Login() {
 					onChange={e => dispatch({ type: "password", password: e.target.value })}
 				/>
 				{!errorLogin || <p className='form-error'>{errorLogin}</p>}
-				<button className='btn-form btn-form-login'>
-					Zaloguj
-				</button>
+				<button className='btn-form btn-form-login'>Zaloguj</button>
 				<Link className='password-recovery' to='/reset-hasla'>
 					Nie pamiętam hasła...
 				</Link>

@@ -4,7 +4,7 @@ function Filter(props) {
 	return (
 		<div className='box-filter'>
 			<input
-				className='filter-input'
+				className='filter-input form-input'
 				type='text'
 				value={props.valueSearch}
 				onChange={e =>

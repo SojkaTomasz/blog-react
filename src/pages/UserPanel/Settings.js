@@ -4,6 +4,7 @@ import Preloader from "../../UI/Preloader"
 import ChangeEmail from "../../components/UserPanel/Settings/ChangeEmail"
 import ChangePassword from "../../components/UserPanel/Settings/ChangePassword"
 import DeleteAccount from "../../components/UserPanel/Settings/DeleteAccount"
+import AddPhoto from "../../components/UserPanel/Settings/AddPhoto"
 
 function Settings() {
 	const loginContext = useContext(LoginContext)
@@ -15,6 +16,7 @@ function Settings() {
 			<div>
 				<ChangeEmail />
 				<ChangePassword />
+				<AddPhoto />
 				<DeleteAccount />
 			</div>
 		)
