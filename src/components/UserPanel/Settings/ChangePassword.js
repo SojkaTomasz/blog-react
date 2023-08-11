@@ -92,6 +92,7 @@ function ChangePassword() {
 				email: res.data.email,
 				idToken: res.data.idToken,
 				localId: res.data.localId,
+				photoUrl: loginContext.dataUser.photoUrl,
 			})
 			dispatch({ type: "password", password: "" })
 			dispatch({ type: "repeatPassword", repeatPassword: "" })
@@ -142,37 +143,38 @@ function ChangePassword() {
 						<p className='success-settings'>{changePasswordSuccess}</p>
 					)}
 					{changePasswordToggle ? (
-						<form className='box-settings' onSubmit={handleValidateChangePassword}>
-							<label className='label-settings' htmlFor='password'>
-								Hasło
-							</label>
+						<form
+							className='box-settings active-change-settings-user-data'
+							onSubmit={handleValidateChangePassword}
+						>
 							<input
 								id='password'
 								className='form-input'
 								type='password'
+								placeholder="Podaj hasło"
 								value={password}
 								onChange={e => dispatch({ type: "password", password: e.target.value })}
-							/>
+								/>
 							{errorPassword && <p className='form-error error-settings'>{errorPassword}</p>}
-							<label className='label-settings' htmlFor='repeatPassword'>
-								Powtórz Hasło
-							</label>
 							<input
 								className='form-input'
 								type='password'
 								id='repeatPassword'
+								placeholder="Powtórz hasło"
 								value={repeatPassword}
 								onChange={e =>
 									dispatch({ type: "repeatPassword", repeatPassword: e.target.value })
 								}
 							/>
-							<button className='btn-form btn-settings'>Zmień</button>
-							<button className='btn-form btn-settings' onClick={clickChange}>
-								Anuluj
-							</button>
 							{errorRepeatPassword && (
 								<p className='form-error error-settings'>{errorRepeatPassword}</p>
 							)}
+							<div>
+								<button className='btn-form btn-settings'>Zmień</button>
+								<button className='btn-form btn-settings' onClick={clickChange}>
+									Anuluj
+								</button>
+							</div>
 						</form>
 					) : (
 						<button className='btn-form btn-settings' onClick={clickChange}>

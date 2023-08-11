@@ -10,6 +10,7 @@
 .select-filter,
 .filter-input {
 	margin: 3px;
+	border: 1px solid #d0d0d0;
 }
 
 .select-filter {

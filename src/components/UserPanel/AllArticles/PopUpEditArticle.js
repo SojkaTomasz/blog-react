@@ -115,6 +115,7 @@ function PopUpEditArticle() {
 			const changedArticleData = {
 				[dataEditArticle.id]: {
 					author: loginContext.dataUser.email,
+					authorPhoto: loginContext.dataUser.photoUrl,
 					datePublication: new Date(dataEditArticle.datePublication).toJSON(),
 					description: dataEditArticle.description,
 					image: imageUrl,

@@ -25,37 +25,34 @@ function DeleteAccount() {
 
 	const clickDeleteAccount = () => {
 		setToggleBtn(!toggleBtn)
-		setInfo("Czy na pewno ?")
+		setInfo("CZY JESTEŚ PEWIEN ?!")
 	}
 
 	return (
 		<div>
 			{!toggleBtn ? (
 				<button
-					style={{ backgroundColor: "tomato" }}
-					className='btn-form btn-settings'
+					className='btn-form btn-settings btn-delete'
 					onClick={clickDeleteAccount}
 				>
 					Usuń Konto
 				</button>
 			) : (
-				<>
+				<div className="active-change-settings-user-data">
+					<p className='form-error error-settings'>{info}</p>
 					<button
-						style={{ backgroundColor: "tomato", marginRight: 2 }}
-						className='btn-form btn-settings'
+						className='btn-form btn-settings btn-delete'
 						onClick={clickDeleteAccount}
 					>
 						Nie usuwaj
 					</button>
 					<button
-						style={{ backgroundColor: "tomato" }}
-						className='btn-form btn-settings'
+						className='btn-form btn-settings btn-delete'
 						onClick={acceptAccountDeletion}
 					>
 						Tak usuń
 					</button>
-					<p className='form-error error-settings'>{info}</p>
-				</>
+				</div>
 			)}
 		</div>
 	)

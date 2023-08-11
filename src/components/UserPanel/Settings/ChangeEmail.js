@@ -62,6 +62,7 @@ function ChangeEmail() {
 				email: res.data.email,
 				idToken: res.data.idToken,
 				localId: res.data.localId,
+				photoUrl: loginContext.dataUser.photoUrl,
 			})
 			dispatch({ type: "email", email: "" })
 			dispatch({
@@ -98,47 +99,43 @@ function ChangeEmail() {
 		})
 	}
 
-	if (!loginContext.dataUser) {
-		return <Preloader />
-	} else {
-		return (
-			<>
-				{toggleChangingData ? (
-					<Preloader />
-				) : (
-					<div>
-						<p>
-							Twój aktualny email: <strong>{loginContext.dataUser.email}</strong>
-						</p>
-						{changeEmailSuccess && (
-							<p className='success-settings'>{changeEmailSuccess}</p>
-						)}
-						{changeEmailToggle ? (
-							<form className='box-settings' onSubmit={handleValidateChangeEmail}>
-								<input
-									id='email'
-									className='form-input'
-									type='email'
-									value={email}
-									placeholder='Wpisz nowy email'
-									onChange={e => dispatch({ type: "email", email: e.target.value })}
-								/>
+	return (
+		<>
+			{toggleChangingData ? (
+				<Preloader />
+			) : (
+				<div>
+					{changeEmailSuccess && <p className='success-settings'>{changeEmailSuccess}</p>}
+					{changeEmailToggle ? (
+						<form
+							className='box-settings active-change-settings-user-data'
+							onSubmit={handleValidateChangeEmail}
+						>
+							<input
+								id='email'
+								className='form-input'
+								type='email'
+								value={email}
+								placeholder='Wpisz nowy email'
+								onChange={e => dispatch({ type: "email", email: e.target.value })}
+							/>
+							{errorEmail && <p className='form-error error-settings'>{errorEmail}</p>}
+							<div>
 								<button className='btn-form btn-settings'>Zmień</button>
 								<button className='btn-form btn-settings' onClick={clickChange}>
 									Anuluj
 								</button>
-								{errorEmail && <p className='form-error error-settings'>{errorEmail}</p>}
-							</form>
-						) : (
-							<button className='btn-form btn-settings' onClick={clickChange}>
-								Zmień email
-							</button>
-						)}
-					</div>
-				)}
-			</>
-		)
-	}
+							</div>
+						</form>
+					) : (
+						<button className='btn-form btn-settings' onClick={clickChange}>
+							Zmień email
+						</button>
+					)}
+				</div>
+			)}
+		</>
+	)
 }
 
 export default ChangeEmail

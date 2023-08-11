@@ -3,6 +3,7 @@
 	flex-wrap: wrap;
 	margin-bottom: 20px;
 	background-color: #f0f0f0;
+	border: 1px solid #d0d0d0;
 	list-style: none;
 }
 
@@ -28,49 +29,3 @@
 	color: white;
 }
 
-.box-form-user-panel {
-}
-
-/* Settings */
-
-.box-settings {
-}
-
-.btn-settings {
-	display: inline;
-	font-size: 16px;
-}
-
-.label-settings {
-	display: block;
-}
-
-.error-settings {
-	text-align: left;
-}
-
-.box-form-add-article {
-	display: flex;
-	flex-direction: column;
-}
-
-.checkbox-add-article {
-	display: flex;
-	align-items: center;
-}
-
-.checkbox-add-article > label {
-	margin-right: 10px;
-}
-
-.checkbox-add-article > input {
-	height: 15px;
-	width: 15px;
-}
-
-.success-settings {
-	font-weight: bold;
-	color: yellowgreen;
-}
-
-/* AddArticle */

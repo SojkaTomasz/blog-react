@@ -6,6 +6,7 @@ import { slugify } from "transliteration"
 import Preloader from "../UI/Preloader"
 import axios from "axios"
 import noPhoto from "../images/no-image-available.jpg"
+import user from "../images/user.png"
 import "../styles/article.css"
 
 const HTTPS_URL = `${firebaseConfig.databaseURL}/articles.json`
@@ -41,7 +42,8 @@ function Article() {
 		return <Preloader />
 	}
 
-	const { title, author, description, image, datePublication } = dataArticle
+	const { title, author, description, image, datePublication, authorPhoto } =
+		dataArticle
 	const date = new Date(datePublication).toLocaleString()
 
 	if (!loginContext.isLogged) {
@@ -66,6 +68,11 @@ function Article() {
 					)}
 				</div>
 				<h2 className='title-article'>{title}</h2>
+				{authorPhoto ? (
+					<img style={{ width: 50, borderRadius: "50%" }} src={authorPhoto} alt='' />
+				) : (
+					<img style={{ width: 50, borderRadius: "50%" }} src={user} alt='' />
+				)}
 				<p>
 					<strong>Autor:</strong> <em>{author}</em>
 				</p>

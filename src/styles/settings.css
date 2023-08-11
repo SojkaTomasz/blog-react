@@ -1,0 +1,93 @@
+.box-settings {
+}
+
+.btn-settings {
+	display: inline;
+	font-size: 16px;
+	margin-right: 4px;
+}
+
+.btn-delete {
+	background-color: tomato;
+	font-size: 14px;
+}
+.btn-delete:hover {
+	background-color: rgb(219, 81, 57);
+}
+
+.label-settings {
+	display: block;
+}
+
+.error-settings {
+	text-align: left;
+}
+
+.box-form-add-article {
+	display: flex;
+	flex-direction: column;
+}
+
+.checkbox-add-article {
+	display: flex;
+	align-items: center;
+}
+
+.checkbox-add-article > label {
+	margin-right: 10px;
+}
+
+.checkbox-add-article > input {
+	height: 15px;
+	width: 15px;
+}
+
+.box-user-panel-settings {
+	border: 2px solid #f0f0f0;
+}
+
+.success-settings {
+	font-weight: bold;
+	color: yellowgreen;
+}
+
+.box-user-panel-settings-info {
+	background-color: #f0f0f0;
+	text-align: center;
+}
+
+.box-user-panel-settings > div {
+	padding: 20px;
+}
+
+.box-user-panel-settings input {
+	width: 100%;
+}
+
+.active-change-settings-user-data {
+	padding: 10px;
+	background-color: #464646;
+}
+
+@media (min-width: 457px) {
+}
+@media (min-width: 768px) {
+	.box-user-panel-settings {
+		border: 2px solid #f0f0f0;
+		display: flex;
+		flex-wrap: wrap;
+	}
+	.box-user-panel-settings > div {
+		flex: 1;
+	}
+	.box-user-panel-settings-changes {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+	.box-user-panel-settings-info {
+		margin-bottom: 0;
+	}
+}
+@media (min-width: 992px) {
+}
