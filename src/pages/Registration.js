@@ -106,7 +106,7 @@ function Registration() {
 							email: res.data.email,
 							idToken: res.data.idToken,
 							localId: res.data.localId,
-							photoUrl: null,
+							photoUserUrl: null,
 						})
 						navigate("/panel-uzytkownika")
 					}, 3000)

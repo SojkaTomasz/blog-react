@@ -75,7 +75,7 @@ function PopUpEditArticle() {
 		} else if (toggleCheckbox && dataEditArticle.image === imageEditArticle) {
 			dispatch({
 				type: "errorImage",
-				errorImage: "Dodaj nowe artykułu lub odznacz poniżej!",
+				errorImage: "Dodaj nowe zdjęcie lub odznacz poniżej!",
 			})
 		} else {
 			dispatch({ type: "errorImage", errorImage: "" })
@@ -115,7 +115,7 @@ function PopUpEditArticle() {
 			const changedArticleData = {
 				[dataEditArticle.id]: {
 					author: loginContext.dataUser.email,
-					authorPhoto: loginContext.dataUser.photoUrl,
+					photoUserUrl: loginContext.dataUser.photoUserUrl,
 					datePublication: new Date(dataEditArticle.datePublication).toJSON(),
 					description: dataEditArticle.description,
 					image: imageUrl,

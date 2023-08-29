@@ -86,10 +86,11 @@ function AddArticle() {
 			}
 			const articleData = {
 				author: loginContext.dataUser.email || "Anonimowy",
-				title: dataAddArticle.title,
+				photoUserUrl: loginContext.dataUser.photoUserUrl,
+				datePublication: dataAddArticle.datePublication,
 				description: dataAddArticle.description,
 				image: imageUrl,
-				datePublication: dataAddArticle.datePublication,
+				title: dataAddArticle.title,
 			}
 			await axios.post(HTTPS_URL, articleData)
 			navigate("/panel-uzytkownika/wszystkie-artykuły")

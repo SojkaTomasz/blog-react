@@ -11,10 +11,10 @@ function InfoUser() {
 		return (
 			<>
 				<div>
-					{loginContext.dataUser.photoUrl ? (
+					{loginContext.dataUser.photoUserUrl ? (
 						<img
 							style={{ width: 200, borderRadius: "50%" }}
-							src={loginContext.dataUser.photoUrl}
+							src={loginContext.dataUser.photoUserUrl}
 							alt=''
 						/>
 					) : (

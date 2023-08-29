@@ -25,11 +25,12 @@ function Login() {
 					password,
 					returnSecureToken: true,
 				})
+				console.log(res);
 				loginContext.login({
 					email: res.data.email,
 					idToken: res.data.idToken,
 					localId: res.data.localId,
-					photoUrl: res.data.profilePicture || null,
+					photoUserUrl: res.data.profilePicture || null,
 				})
 				navigate("/panel-uzytkownika")
 			} catch (ex) {

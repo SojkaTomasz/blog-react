@@ -23,8 +23,8 @@ function AddPhoto() {
 			if (photo) {
 				if (loginContext.dataUser.localId !== "nPX6h1SzE4TYXh7kktlB489Apzv2") {
 					setToggleChangingData(true)
-					let imageUrl = null
-					if (!loginContext.dataUser.photoUrl) {
+					let photoUserUrl = null
+					if (!loginContext.dataUser.photoUserUrl) {
 						const photoId = v4()
 						await axios.post(HTTPS_URL_databaseURL, {
 							localId: loginContext.dataUser.localId,
@@ -32,7 +32,7 @@ function AddPhoto() {
 						})
 						const imageRef = ref(storage, `images-user/${photoId}`)
 						await uploadBytes(imageRef, photo)
-						imageUrl = await getDownloadURL(imageRef)
+						photoUserUrl = await getDownloadURL(imageRef)
 					} else {
 						const res = await axios.get(HTTPS_URL_databaseURL)
 						let dataUsers = []
@@ -44,18 +44,18 @@ function AddPhoto() {
 						)
 						const imageRef = ref(storage, `images-user/${findUser[0].photoId}`)
 						await uploadBytes(imageRef, photo)
-						imageUrl = await getDownloadURL(imageRef)
+						photoUserUrl = await getDownloadURL(imageRef)
 					}
 					const articleData = {
 						idToken: loginContext.dataUser.idToken,
-						photoUrl: imageUrl,
+						photoUserUrl,
 					}
 					const res = await axios.post(HTTPS_URL, articleData)
 					loginContext.login({
 						email: res.data.email,
 						idToken: loginContext.dataUser.idToken,
 						localId: res.data.localId,
-						photoUrl: imageUrl,
+						photoUserUrl,
 					})
 					setToggleChangingData(false)
 					setToggleAddPhoto(false)
@@ -98,7 +98,7 @@ function AddPhoto() {
 									onChange={e => setPhoto(e.target.files[0])}
 								/>
 								{!errorInfo || <p className='form-error  error-settings'>{errorInfo}</p>}
-								{loginContext.dataUser.photoUrl ? (
+								{loginContext.dataUser.photoUserUrl ? (
 									<button className='btn-form btn-settings'>aktualizuj</button>
 								) : (
 									<button className='btn-form btn-settings'>Dodaj</button>
@@ -109,7 +109,7 @@ function AddPhoto() {
 							</form>
 						) : (
 							<>
-								{loginContext.dataUser.photoUrl ? (
+								{loginContext.dataUser.photoUserUrl ? (
 									<button className='btn-form btn-settings' onClick={toggleAddingPhotos}>
 										Aktualizuj zdjęcie
 									</button>

@@ -92,7 +92,7 @@ function ChangePassword() {
 				email: res.data.email,
 				idToken: res.data.idToken,
 				localId: res.data.localId,
-				photoUrl: loginContext.dataUser.photoUrl,
+				photoUserUrl: loginContext.dataUser.photoUserUrl,
 			})
 			dispatch({ type: "password", password: "" })
 			dispatch({ type: "repeatPassword", repeatPassword: "" })

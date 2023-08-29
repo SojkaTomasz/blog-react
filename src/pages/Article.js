@@ -4,6 +4,7 @@ import LoginContext from "../context/loginContext"
 import { firebaseConfig } from "../firebase"
 import { slugify } from "transliteration"
 import Preloader from "../UI/Preloader"
+import Comments from "../components/Blog/Comments/Comments"
 import axios from "axios"
 import noPhoto from "../images/no-image-available.jpg"
 import user from "../images/user.png"
@@ -27,7 +28,6 @@ function Article() {
 			for (const key in res.data) {
 				allArticles.push({ ...res.data[key], id: key })
 			}
-			console.log(allArticles)
 			const article = allArticles.find(
 				article =>
 					slugify(article.title.replaceAll(" ", "-") + article.id.toLowerCase()) === id
@@ -42,7 +42,7 @@ function Article() {
 		return <Preloader />
 	}
 
-	const { title, author, description, image, datePublication, authorPhoto } =
+	const { title, author, description, image, datePublication, photoUserUrl } =
 		dataArticle
 	const date = new Date(datePublication).toLocaleString()
 
@@ -57,30 +57,33 @@ function Article() {
 		)
 	} else {
 		return (
-			<article className='box-article'>
-				<h1 className='title-section title-section-article'>Artykuł</h1>
-				<Link className='link-article' to='/blog'>{`<< Powrót do bloga`}</Link>
-				<div className='box-img'>
-					{image ? (
-						<img className='img-article' src={image} alt={title} />
+			<>
+				<article className='box-article'>
+					<h1 className='title-section title-section-article'>Artykuł</h1>
+					<Link className='link-article' to='/blog'>{`<< Powrót do bloga`}</Link>
+					<div className='box-img'>
+						{image ? (
+							<img className='img-article' src={image} alt={title} />
+						) : (
+							<img className='img-article' src={noPhoto} alt='brak zdjęcia' />
+						)}
+					</div>
+					<h2 className='title-article'>{title}</h2>
+					{photoUserUrl ? (
+						<img style={{ width: 50, borderRadius: "50%" }} src={photoUserUrl} alt='' />
 					) : (
-						<img className='img-article' src={noPhoto} alt='brak zdjęcia' />
+						<img style={{ width: 50, borderRadius: "50%" }} src={user} alt='' />
 					)}
-				</div>
-				<h2 className='title-article'>{title}</h2>
-				{authorPhoto ? (
-					<img style={{ width: 50, borderRadius: "50%" }} src={authorPhoto} alt='' />
-				) : (
-					<img style={{ width: 50, borderRadius: "50%" }} src={user} alt='' />
-				)}
-				<p>
-					<strong>Autor:</strong> <em>{author}</em>
-				</p>
-				<p>
-					<strong> Data publikacji:</strong> {date}
-				</p>
-				<div style={{ whiteSpace: "pre-wrap" }}>{description}</div>
-			</article>
+					<p>
+						<strong>Autor:</strong> <em>{author}</em>
+					</p>
+					<p>
+						<strong> Data publikacji:</strong> {date}
+					</p>
+					<div style={{ whiteSpace: "pre-wrap" }}>{description}</div>
+				</article>
+				<Comments dataArticle={dataArticle} />
+			</>
 		)
 	}
 }
