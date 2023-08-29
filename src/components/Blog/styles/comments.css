@@ -10,18 +10,27 @@
 
 .box-comment {
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 	justify-content: flex-start;
 }
 
 .comment {
 	display: flex;
-	justify-content: space-between;
-	align-items: center;
+	flex-wrap: wrap;
+	flex-direction: column;
+	align-items: flex-start;
 	flex-grow: 1;
 	padding: 10px;
 	margin: 5px 0;
 	background-color: #ececec;
+}
+
+.btn-delete-comment {
+	margin-top: 3px;
+	padding: 2px 5px;
+	font-size: 14px;
+	color: white;
+	background-color: yellowgreen;
 }
 
 .comment-author,

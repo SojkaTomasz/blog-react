@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { firebaseConfig } from "../../../firebase"
+import DeleteComment from "./DeleteComment"
 import user from "../../../images/user.png"
+import LoginContext from "../../../context/loginContext"
 import axios from "axios"
 
 const HTTPS_URL = `${firebaseConfig.databaseURL}/comments.json`
 
 function ListComments(props) {
 	const [comments, setComments] = useState()
-
+	const loginContext = useContext(LoginContext)
 	useEffect(() => {
 		getDataComments()
 	}, [])
@@ -48,13 +50,15 @@ function ListComments(props) {
 							/>
 						)}
 						<div className='comment'>
-							<div>
-								<p className='comment-author'>{comment.author}</p>
-								<p className='comment-content'>{comment.textComment}</p>
-								<p className='comment-date'>
-									{new Date(comment.dateAddComment).toLocaleString()}
-								</p>
-							</div>
+							<p className='comment-author'>{comment.author}</p>
+							<p className='comment-content'>{comment.textComment}</p>
+							<p className='comment-date'>
+								{new Date(comment.dateAddComment).toLocaleString()}
+							</p>
+
+							{comment.idUser === loginContext.dataUser.localId && (
+								<DeleteComment id={comment.id} />
+							)}
 						</div>
 					</div>
 				))}
