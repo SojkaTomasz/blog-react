@@ -48,7 +48,7 @@ function AddPhoto() {
 					}
 					const articleData = {
 						idToken: loginContext.dataUser.idToken,
-						photoUserUrl,
+						photoUrl: photoUserUrl,
 					}
 					const res = await axios.post(HTTPS_URL, articleData)
 					loginContext.login({
