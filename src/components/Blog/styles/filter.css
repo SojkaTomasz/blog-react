@@ -1,0 +1,35 @@
+.box-filter {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: flex-end;
+	margin: 0 -3px;
+	padding: 10px 0;
+}
+
+.select-filter,
+.filter-input {
+	margin: 3px;
+	border: 1px solid #d0d0d0;
+}
+
+.select-filter {
+	cursor: pointer;
+}
+
+.filter-input {
+	flex-grow: 1;
+}
+
+@media (min-width: 576px) {
+	.filter {
+		display: inline;
+	}
+}
+@media (min-width: 768px) {
+	.box-filter {
+		height: 68px;
+	}
+}
+@media (min-width: 992px) {
+}

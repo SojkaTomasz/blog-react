@@ -1,0 +1,123 @@
+.box-nav {
+	position: relative;
+	position: sticky;
+	top: 0;
+}
+
+.header-nav {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px;
+	background-color: #2d2d2d;
+	z-index: 5;
+}
+
+.logo-nav {
+	padding-left: 10px;
+	font-size: 35px;
+	color: white;
+	text-decoration: none;
+}
+
+.logo-nav span {
+	color: yellowgreen;
+}
+
+.icon-nav {
+	padding: 5px;
+	font-size: 30px;
+	color: white;
+	transition: color 0.5s;
+	cursor: pointer;
+}
+
+.icon-nav:hover {
+	color: yellowgreen;
+}
+
+.list-nav {
+	position: absolute;
+	left: 0;
+	right: 0;
+	transform: translateY(-100%);
+	padding: 10px 15px;
+	list-style: none;
+	background-color: #333;
+	transition: transform 0.5s;
+	z-index: 1;
+}
+
+.list-nav-active {
+	transform: translateY(0);
+}
+
+.link-nav {
+	display: block;
+	height: 100%;
+	width: 100%;
+	padding: 10px;
+	font-size: 18px;
+	font-weight: bold;
+	text-transform: uppercase;
+	text-decoration: none;
+	color: white;
+	transition: transform 0.4s;
+}
+
+.link-nav:hover {
+	transform: translateX(10px);
+}
+
+.li-nav {
+	position: relative;
+	border-left: 5px solid transparent;
+	transition: background-color 0.4s;
+}
+
+.li-nav:hover {
+	background-color: #222;
+	border-left: 5px solid yellowgreen;
+}
+
+.active {
+	color: yellowgreen;
+}
+
+.active:hover {
+	transform: translateX(0);
+}
+
+@media (min-width: 576px) {
+}
+@media (min-width: 768px) {
+	.header-nav {
+		justify-content: center;
+	}
+}
+
+@media (min-width: 768px) {
+	.box-nav {
+		width: 200px;
+	}
+
+	.logo-nav {
+		font-size: 40px;
+	}
+
+	.icon-nav {
+		display: none;
+	}
+
+	.list-nav {
+		position: relative;
+		transform: translate(0);
+		padding: 10px;
+	}
+
+	.li-nav {
+		margin: 10px 0;
+		padding: 0 20px 0 0;
+	}
+}

@@ -1,0 +1,42 @@
+.txt-home {
+	margin: 10px 0;
+	line-height: 1.2;
+}
+
+.icon-home {
+	font-size: 30px;
+	margin: 5px;
+	padding: 3px;
+	color: yellowgreen;
+	cursor: pointer;
+	transition: 0.4s;
+}
+
+.icon-home:hover {
+	transform: scale(1.2);
+}
+
+.box-img-home {
+	width: 140px;
+	margin: 0 0 0px 8px;
+	float: right;
+}
+
+.img-home {
+	box-shadow: 5px 5px 0 0 yellowgreen;
+	width: 100%;
+}
+
+@media (min-width: 576px) {
+	.box-img-home {
+		width: 200px;
+		margin: 0 0 0 10px;
+	}
+}
+@media (min-width: 768px) {
+}
+@media (min-width: 992px) {
+	.box-img-home {
+		width: 250px;
+	}
+}

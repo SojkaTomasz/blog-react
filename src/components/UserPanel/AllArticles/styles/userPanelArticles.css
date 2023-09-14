@@ -1,0 +1,43 @@
+.box-all-articles {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+	align-items: center;
+	margin: 8px 0;
+	border: 1px solid rgb(231, 231, 231);
+}
+
+.box-img-all-articles {
+	display: flex;
+	flex-grow: 1;
+	align-items: center;
+	padding: 5px;
+}
+
+.box-img-all-articles > img {
+	width: 60px;
+	margin-right: 10px;
+	background-size: cover;
+	transition: width 0.3s;
+}
+
+.box-img-all-articles > p {
+	margin: 0 10px;
+}
+
+.box-btn-all-articles {
+	display: flex;
+	padding: 5px;
+}
+
+.icon-all-articles {
+	padding: 8px;
+	margin-left: 4px;
+	background-color: yellowgreen;
+	color: rgb(255, 255, 255);
+	cursor: pointer;
+}
+
+.date-publication-all-articles {
+	font-size: 14px;
+}

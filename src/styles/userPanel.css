@@ -1,0 +1,31 @@
+.box-nav-user-panel {
+	display: flex;
+	flex-wrap: wrap;
+	margin-bottom: 20px;
+	background-color: #f0f0f0;
+	border: 1px solid #d0d0d0;
+	list-style: none;
+}
+
+.item-nav-user-panel {
+	display: flex;
+}
+
+.link-user-panel {
+	text-decoration: none;
+	color: #222;
+	padding: 8px 12px;
+	background-color: #f0f0f0;
+	cursor: pointer;
+}
+
+.link-user-panel:hover {
+	background-color: yellowgreen;
+	color: white;
+}
+
+.active-link-user-panel {
+	background-color: yellowgreen;
+	color: white;
+}
+

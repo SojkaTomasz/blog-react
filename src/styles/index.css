@@ -1,0 +1,17 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html, pre {
+	font-family: "Roboto", sans-serif;
+	scroll-behavior: smooth;
+}
+
+body {
+	margin: 0 auto;
+	width: 100%;
+	max-width: 1200px;
+	background-color: rgb(228, 228, 228);
+}
